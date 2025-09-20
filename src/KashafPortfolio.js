@@ -358,15 +358,15 @@ export default function KashafPortfolio() {
               gap: '2rem'
             }}>
               <div className="story-card">
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🇵🇰</div>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
                 <h3 style={{ marginBottom: '1rem', color: '#ff6b6b' }}>Rooted in Community</h3>
                 <p>Raised in Pakistan, I learned early that true impact starts with understanding people’s needs. That lesson shapes how I approach every project I build.</p>
               </div>
               
               <div className="story-card">
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🚀</div>
-                <h3 style={{ marginBottom: '1rem', color: '#4ecdc4' }}>Breaking Barriers</h3>
-                <p>In a male-dominated society, I chose to leap across continents to pursue my dreams at Bryn Mawr College, studying Computer Science and Mathematics.</p>
+                <h3 style={{ marginBottom: '1rem', color: '#4ecdc4' }}>`Crossing Borders</h3>
+                <p>Leaving home to study Computer Science and Mathematics in the U.S. was more than an academic choice — it was a leap of faith. It taught me resilience, adaptability, and the courage to lead in new spaces.</p>
               </div>
               
               <div className="story-card">
