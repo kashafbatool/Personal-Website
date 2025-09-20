@@ -275,7 +275,7 @@ export default function KashafPortfolio() {
               opacity: 0.9,
               fontWeight: '300' 
             }}>
-              Hey there! I'm
+              est 2005
             </div>
             <h1 style={{
               fontSize: 'clamp(3rem, 8vw, 6rem)',
@@ -296,7 +296,7 @@ export default function KashafPortfolio() {
               lineHeight: 1.6,
               fontWeight: '300'
             }}>
-              Building tech that bridges cultures, empowers communities, and creates meaningful change
+              Building software that speaks human 
             </div>
             
             {/* Stats */}
