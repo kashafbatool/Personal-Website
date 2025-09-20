@@ -359,8 +359,8 @@ export default function KashafPortfolio() {
             }}>
               <div className="story-card">
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🇵🇰</div>
-                <h3 style={{ marginBottom: '1rem', color: '#ff6b6b' }}>From Pakistan to Pennsylvania</h3>
-                <p>Growing up in a big Pakistani family where community is everything, I learned early that the best solutions come from understanding people's real needs.</p>
+                <h3 style={{ marginBottom: '1rem', color: '#ff6b6b' }}>Rooted in Community</h3>
+                <p>Raised in Pakistan, I learned early that true impact starts with understanding people’s needs. That lesson shapes how I approach every project I build.</p>
               </div>
               
               <div className="story-card">
