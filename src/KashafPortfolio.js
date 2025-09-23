@@ -144,12 +144,13 @@ export default function KashafPortfolio() {
 
   const projects = [
     {
-      title: "LocalLink",
+      title: "Local Link",
       tech: "React Native, TypeScript, Firebase, Figma",
       description: "Mobile app connecting rural artisans with customers through multilingual interface optimized for low-literacy users.",
       highlights: ["Multilingual UI with large icons", "Firebase authentication", "Low-bandwidth optimization"],
       color: "#ff6b6b",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&crop=center"
+      //image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&crop=center"
+      video: "/videos/locallink.mp4"
     },
     {
       title: "Fresh Start",
@@ -157,7 +158,7 @@ export default function KashafPortfolio() {
       description: "Chatbot web app centralizing campus resources for 5,000+ Tri-College students with special international student features.",
       highlights: ["User research with 5,000+ students", "NLP-based queries", "International student focus"],
       color: "#4ecdc4",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&h=300&fit=crop&crop=center"
+      video: "/videos/freshstart.mp4"
     },
     {
       title: "Alvi Auctioneers Redesign",
@@ -359,20 +360,20 @@ export default function KashafPortfolio() {
             }}>
               <div className="story-card">
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
-                <h3 style={{ marginBottom: '1rem', color: '#ff6b6b' }}>Rooted in Community</h3>
-                <p>Raised in Pakistan, I learned early that true impact starts with understanding people’s needs. That lesson shapes how I approach every project I build.</p>
+                <h3 style={{ marginBottom: '1rem', color: '#ff6b6b' }}>Bridging Worlds</h3>
+                <p>From growing up in Pakistan to studying in the U.S., my journey has been about crossing borders — both physical and cultural. Being an international student means I carry my roots with me while building a future in tech that speaks to everyone, everywhere.</p>
               </div>
               
               <div className="story-card">
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🚀</div>
-                <h3 style={{ marginBottom: '1rem', color: '#4ecdc4' }}>`Crossing Borders</h3>
-                <p>Leaving home to study Computer Science and Mathematics in the U.S. was more than an academic choice — it was a leap of faith. It taught me resilience, adaptability, and the courage to lead in new spaces.</p>
+                <h3 style={{ marginBottom: '1rem', color: '#4ecdc4' }}>Breaking Barriers</h3>
+                <p>In a world where girls were often discouraged from STEM, I chose to write a different story. Moving continents to pursue Computer Science has not just been about academics, but about proving to myself and others that curiosity and persistence can overcome any boundary.</p>
               </div>
               
               <div className="story-card">
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💡</div>
                 <h3 style={{ marginBottom: '1rem', color: '#45b7d1' }}>Innovation with Intention</h3>
-                <p>Now I design technology that's culturally responsive, inclusive, and accessible—because the best tech serves everyone.</p>
+                <p>As an international student, I see technology not just as a career, but as a responsibility. My experiences taught me that inclusion matters — that solutions must reflect diverse voices. That’s why I design with empathy, creating tech that is accessible and meaningful.</p>
               </div>
             </div>
           </div>
@@ -412,17 +413,37 @@ export default function KashafPortfolio() {
             <div className="project-showcase">
               <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div style={{ flex: '1', minWidth: '300px' }}>
-                  <img 
-                    src={projects[currentProject].image} 
-                    alt={projects[currentProject].title}
-                    style={{
-                      width: '100%',
-                      height: '250px',
-                      objectFit: 'cover',
-                      borderRadius: '15px',
-                      border: `4px solid ${projects[currentProject].color}`
-                    }}
-                  />
+                  {projects[currentProject].video ? (
+  <video
+  key={projects[currentProject].video}  
+  src={projects[currentProject].video}
+    controls   
+    autoPlay
+    loop
+    muted
+    playsInline
+    style={{
+      width: '100%',
+      maxHeight: '500px',
+      objectFit: 'cover',
+      borderRadius: '15px',
+      border: `4px solid ${projects[currentProject].color}`
+    }}
+  />
+) : (
+  <img
+    src={projects[currentProject].image}
+    alt={projects[currentProject].title}
+    style={{
+      width: '100%',
+      height: '250px',
+      objectFit: 'cover',
+      borderRadius: '15px',
+      border: `4px solid ${projects[currentProject].color}`
+    }}
+  />
+)}
+
                 </div>
                 <div style={{ flex: '1', minWidth: '300px' }}>
                   <div style={{
