@@ -219,9 +219,9 @@ let animationId;
       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       minHeight: '100vh',
       color: '#fff',
-      overflow: 'hidden',
+      //overflow: 'hidden',
       position: 'relative',
-      background: PALETTE.bg0
+      //background: PALETTE.bg0
     }}>
       {/* Mouse trail canvas */}
       <canvas 
@@ -250,8 +250,8 @@ let animationId;
           top: 20,
           right: 20,
           zIndex: 100,
-          backdropFilter: 'blur(10px)',
-          background: 'rgba(16,17,20,0.8)',
+          backdropFilter: 'saturate(120%) blur(6px)',
+          background: 'rgba(16,17,20,0.25)',
           border: `1px solid ${PALETTE.border}`,
           borderRadius: '25px',
           padding: '10px 20px',
@@ -346,8 +346,8 @@ let animationId;
         <section id="about" style={{
           minHeight: '100vh',
           padding: '100px 20px',
-          background: 'rgba(255,255,255,0.05)',
-          backdropFilter: 'blur(10px)'
+          background: 'rgba(16,17,20,0.25)',
+          backdropFilter: 'saturate(120%) blur(6px)'
         }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <h2 style={{
@@ -373,13 +373,13 @@ let animationId;
               </div>
               
               <div className="story-card">
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🚀</div>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
                 <h3 style={{ marginBottom: '1rem', color: '#4ecdc4' }}>Breaking Barriers</h3>
                 <p>In a world where girls were often discouraged from STEM, I chose to write a different story. Moving continents to pursue Computer Science has not just been about academics, but about proving to myself and others that curiosity and persistence can overcome any boundary.</p>
               </div>
               
               <div className="story-card">
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💡</div>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
                 <h3 style={{ marginBottom: '1rem', color: '#45b7d1' }}>Innovation with Intention</h3>
                 <p>As an international student, I see technology not just as a career, but as a responsibility. My experiences taught me that inclusion matters — that solutions must reflect diverse voices. That’s why I design with empathy, creating tech that is accessible and meaningful.</p>
               </div>
@@ -391,8 +391,8 @@ let animationId;
         <section id="projects" style={{
           minHeight: '100vh',
           padding: '100px 20px',
-          background: 'rgba(255,255,255,0.03)',
-          backdropFilter: 'blur(10px)'
+          background: 'rgba(16,17,20,0.25)',
+          backdropFilter: 'saturate(120%) blur(6px)'
         }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <h2 style={{
@@ -506,8 +506,8 @@ let animationId;
         <section id="gallery" style={{
           minHeight: '100vh',
           padding: '100px 20px',
-          background: 'rgba(255,255,255,0.07)',
-          backdropFilter: 'blur(10px)'
+          background: 'rgba(16,17,20,0.25)',
+          backdropFilter: 'saturate(120%) blur(6px)'
         }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <h2 style={{
@@ -616,8 +616,8 @@ let animationId;
         <section id="skills" style={{
           minHeight: '100vh',
           padding: '100px 20px',
-          background: 'rgba(255,255,255,0.05)',
-          backdropFilter: 'blur(10px)'
+          background: 'rgba(16,17,20,0.25)',
+          backdropFilter: 'saturate(120%) blur(6px)'
         }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <h2 style={{
