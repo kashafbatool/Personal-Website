@@ -13,6 +13,26 @@
   }
 }
 
+:root{
+  --bg-0:#0b0b0d;        /* near-black */
+  --bg-1:#101114;        /* card bg */
+  --ink:#f3f4f6;         /* primary text (white-ish) */
+  --ink-dim:#9aa0a6;     /* secondary text (grey) */
+  --accent:#e11d2e;      /* red */
+  --accent-2:#ff385a;    /* pinky-red for hover glow */
+  --border:#1c1d20;      /* subtle borders */
+}
+
+html,body,#root{height:100%;}
+body{
+  background: var(--bg-0);
+  color: var(--ink);
+  margin:0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk', 'Inter', sans-serif; letter-spacing:.2px;}
+a{ color: var(--ink); text-decoration:none; }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -27,6 +47,25 @@
 .App-link {
   color: #61dafb;
 }
+.gallery-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 350px;   /* limits card width */
+  overflow: hidden;
+}
+
+.gallery-image {
+  width: 100%;          /* makes it fit card width */
+  max-height: 220px;    /* cap the height */
+  object-fit: cover;    /* crop instead of squish */
+  border-radius: 10px;
+}
+
 
 @keyframes App-logo-spin {
   from {

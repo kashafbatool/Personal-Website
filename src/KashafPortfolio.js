@@ -517,7 +517,7 @@ let animationId;
               fontWeight: '800',
               color: '#333'
             }}>
-              My Journey in Pictures
+                Recent Projects 
             </h2>
             
             <div style={{
@@ -528,7 +528,7 @@ let animationId;
               {/* Davis Projects for Peace */}
               <div className="gallery-card">
                 <img 
-                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=250&fit=crop&crop=center" 
+                  src="/images/davis.JPG" 
                   alt="Davis Projects for Peace - STEM Carnival"
                   className="gallery-image"
                 />
@@ -542,7 +542,7 @@ let animationId;
               {/* World Bank Documentary */}
               <div className="gallery-card">
                 <img 
-                  src="https://images.unsplash.com/photo-1586473219010-2ffc57b0d282?w=400&h=250&fit=crop&crop=center" 
+                  src="/images/worldbank.jpg" 
                   alt="World Bank Documentary Field Work"
                   className="gallery-image"
                 />
@@ -556,56 +556,14 @@ let animationId;
               {/* Bryn Mawr College */}
               <div className="gallery-card">
                 <img 
-                  src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=400&h=250&fit=crop&crop=center" 
+                  src="/images/forte.jpg" 
                   alt="Bryn Mawr College Campus"
                   className="gallery-image"
                 />
                 <div className="gallery-content">
-                  <h3>Bryn Mawr College</h3>
+                  <h3>Forte Ambassador</h3>
                   <p>From Pakistan's winding roads to Bryn Mawr's cobblestones - pursuing Computer Science and Mathematics with purpose.</p>
                   <div className="gallery-tag">Class of 2028</div>
-                </div>
-              </div>
-
-              {/* Community Impact */}
-              <div className="gallery-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=250&fit=crop&crop=center" 
-                  alt="Community Outreach"
-                  className="gallery-image"
-                />
-                <div className="gallery-content">
-                  <h3>Community Outreach</h3>
-                  <p>Working with educators and students to make STEM education more inclusive and accessible for underserved communities.</p>
-                  <div className="gallery-tag">Educational Equity</div>
-                </div>
-              </div>
-
-              {/* Tech for Good */}
-              <div className="gallery-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=250&fit=crop&crop=center" 
-                  alt="Collaborative Tech Work"
-                  className="gallery-image"
-                />
-                <div className="gallery-content">
-                  <h3>Tech for Good</h3>
-                  <p>Building applications that bridge cultural gaps and empower marginalized communities through thoughtful technology.</p>
-                  <div className="gallery-tag">Innovation</div>
-                </div>
-              </div>
-
-              {/* International Impact */}
-              <div className="gallery-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=250&fit=crop&crop=center" 
-                  alt="International Conference"
-                  className="gallery-image"
-                />
-                <div className="gallery-content">
-                  <h3>Global Collaboration</h3>
-                  <p>Presenting climate solutions at international conferences and founding Teens4Peace to engage youth in resilience dialogue.</p>
-                  <div className="gallery-tag">GEIST Foundation</div>
                 </div>
               </div>
             </div>
@@ -829,3 +787,5 @@ let animationId;
     </div>
   );
 }
+
+
