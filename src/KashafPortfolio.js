@@ -396,7 +396,7 @@ useEffect(() => {
       <div className="timeline-vert">
         <div className="timeline-track-vert" />
         <img
-          src="/images/plane.PNG"  
+          src="/images/plane.png"  
           alt="Pink plane"
           className="timeline-plane-vert"
           style={{
