@@ -41,13 +41,90 @@ const journey = [
   }
 ];
 
+const projects = [
+  {
+    title: "Local Link",
+    tech: "React Native, TypeScript, Firebase, Figma",
+    description: "Mobile app connecting rural artisans with customers through multilingual interface optimized for low-literacy users.",
+    highlights: ["Multilingual UI with large icons", "Firebase authentication", "Low-bandwidth optimization"],
+    color: PALETTE.red,
+    video: "/videos/locallink.mp4"
+  },
+  {
+    title: "Fresh Start",
+    tech: "React, JavaScript, Figma, UI/UX Research",
+    description: "Chatbot web app centralizing campus resources for 5,000+ Tri-College students with special international student features.",
+    highlights: ["User research with 5,000+ students", "NLP-based queries", "International student focus"],
+    color: PALETTE.red,
+    video: "/videos/freshstart.mp4"
+  },
+  {
+    title: "Alvi Auctioneers Redesign",
+    tech: "Frontend Development, UX/UI Design",
+    description: "Redesigned auction website improving mobile usability from 65% to 85% and increasing time-on-site from 1.3 to 2.1 minutes.",
+    highlights: ["20% mobile usability improvement", "Navigation optimization", "User engagement boost"],
+    color: PALETTE.red,
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center"
+  },
+  {
+    title: "World Bank Documentary",
+    tech: "Video Production, Data Visualization, Research",
+    description: "5-minute documentary on clean water initiative featuring resident interviews and data visualizations from 4 villages.",
+    highlights: ["Published across 4+ outlets", "Field research in Punjab", "Evidence-based advocacy"],
+    color: PALETTE.red,
+    image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=500&h=300&fit=crop&crop=center"
+  }
+];
 
+const getProject = (title) => projects.find((p) => p.title === title);
 
-
+const projectBuckets = [
+  {
+    id: "ai",
+    label: "AI & Intelligent Systems",
+    items: [
+      { name: "Model-backed tools (coming soon)" }
+    ]
+  },
+  {
+    id: "fullstack",
+    label: "Full-Stack Product Engineering",
+    items: [
+      { ...getProject("Local Link"), slug: "local-link" },
+      { ...getProject("Fresh Start"), slug: "fresh-start" },
+      { ...getProject("Alvi Auctioneers Redesign"), slug: "alvi-auctioneers" }
+    ]
+  },
+  {
+    id: "systems",
+    label: "Systems & Architecture",
+    items: [
+      { name: "Systems & architecture coursework (coming soon)" }
+    ]
+  },
+  {
+    id: "robotics",
+    label: "Robotics & Embodied AI",
+    items: [
+      { name: "Developmental robotics projects (coming soon)" }
+    ]
+  },
+  {
+    id: "research",
+    label: "Research & Fellowships",
+    items: [
+      { ...getProject("World Bank Documentary"), slug: "world-bank-documentary" },
+      { name: "Davis Projects for Peace – STEM Carnival", slug: "davis-projects-for-peace" }
+    ]
+  }
+];
 
 export default function KashafPortfolio() {
   const canvasRef = useRef(null);
-  const [currentProject, setCurrentProject] = useState(0);
+
+  const [openBucketId, setOpenBucketId] = useState("fullstack"); // default bucket
+  const activeBucket = projectBuckets.find((b) => b.id === openBucketId);
+
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState('');
   const [typedIntro, setTypedIntro] = useState("");
@@ -139,41 +216,7 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, []);
 
-  const projects = [
-    {
-      title: "Local Link",
-      tech: "React Native, TypeScript, Firebase, Figma",
-      description: "Mobile app connecting rural artisans with customers through multilingual interface optimized for low-literacy users.",
-      highlights: ["Multilingual UI with large icons", "Firebase authentication", "Low-bandwidth optimization"],
-      color: PALETTE.red,
-      //image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&crop=center"
-      video: "/videos/locallink.mp4"
-    },
-    {
-      title: "Fresh Start",
-      tech: "React, JavaScript, Figma, UI/UX Research",
-      description: "Chatbot web app centralizing campus resources for 5,000+ Tri-College students with special international student features.",
-      highlights: ["User research with 5,000+ students", "NLP-based queries", "International student focus"],
-      color: PALETTE.red,
-      video: "/videos/freshstart.mp4"
-    },
-    {
-      title: "Alvi Auctioneers Redesign",
-      tech: "Frontend Development, UX/UI Design",
-      description: "Redesigned auction website improving mobile usability from 65% to 85% and increasing time-on-site from 1.3 to 2.1 minutes.",
-      highlights: ["20% mobile usability improvement", "Navigation optimization", "User engagement boost"],
-      color: PALETTE.red,
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center"
-    },
-    {
-      title: "World Bank Documentary",
-      tech: "Video Production, Data Visualization, Research",
-      description: "5-minute documentary on clean water initiative featuring resident interviews and data visualizations from 4 villages.",
-      highlights: ["Published across 4+ outlets", "Field research in Punjab", "Evidence-based advocacy"],
-      color: PALETTE.red,
-      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=500&h=300&fit=crop&crop=center"
-    }
-  ];
+  
 
   const skills = {
     "Programming": ["Python", "JavaScript", "Java", "TypeScript"],
@@ -193,6 +236,7 @@ useEffect(() => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+
 
   const handleSubmit = () => {
     setFormStatus('Sending... ✨');
@@ -454,7 +498,7 @@ useEffect(() => {
 <section
   id="projects"
   style={{
-    minHeight: "100vh",
+    minHeight: "80vh",
     padding: "120px 20px",
     background: "rgba(16,17,20,0.25)",
     backdropFilter: "saturate(120%) blur(6px)"
@@ -469,80 +513,66 @@ useEffect(() => {
         fontWeight: "800"
       }}
     >
-      Featured Projects
+      Projects
     </h2>
 
-    {/* project navigation dots (1 2 3 4) */}
-    <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-      {projects.map((_, index) => (
+    {/* category row */}
+    <div className="project-tabs-row">
+      {projectBuckets.map((bucket) => (
         <button
-          key={index}
-          onClick={() => setCurrentProject(index)}
-          className={`project-nav ${currentProject === index ? "active" : ""}`}
+          key={bucket.id}
+          className={`project-tab-button ${
+            openBucketId === bucket.id ? "active" : ""
+          }`}
+          onClick={() =>
+            setOpenBucketId(openBucketId === bucket.id ? null : bucket.id)
+          }
         >
-          {index + 1}
+          {bucket.label}
         </button>
       ))}
     </div>
 
-    {/* main panel – text left, media right */}
-    <div className="project-shell">
-      {/* LEFT – text / details */}
-      <div className="project-copy">
-        <p className="project-label">Case Study</p>
-        <h3 className="project-title">
-          {projects[currentProject].title}
-        </h3>
-        <p className="project-tech">
-          {projects[currentProject].tech}
-        </p>
-        <p className="project-description">
-          {projects[currentProject].description}
-        </p>
+    {/* active dropdown panel */}
+    {activeBucket && (
+      <div className="project-dropdown-panel">
+        <div className="project-dropdown-header">
+          <h3>{activeBucket.label}</h3>
+        </div>
 
-        <div>
-          <h4 className="project-subheading">Key Achievements</h4>
-          <ul className="project-list">
-            {projects[currentProject].highlights.map((highlight, i) => (
-              <li key={i}>{highlight}</li>
-            ))}
-          </ul>
+        <div className="project-dropdown-list">
+          {activeBucket.items.map((item, i) => {
+            const title = item.title || item.name;
+            const tech = item.tech;
+            const slug = item.slug;
+            const href = slug ? `/projects/${slug}` : "#";
+
+            return (
+              <a
+                key={title + i}
+                href={href}
+                className={`project-link-row ${
+                  !slug ? "coming-soon" : ""
+                }`}
+              >
+                <div className="project-link-main">
+                  <span className="project-link-title">{title}</span>
+                  {tech && (
+                    <span className="project-link-meta">{tech}</span>
+                  )}
+                </div>
+                <span className="project-link-arrow">
+                  {slug ? "↗" : "…"}
+                </span>
+              </a>
+            );
+          })}
         </div>
       </div>
-
-      {/* RIGHT – screen recording / mockup */}
-      <div className="project-media">
-        <div className="project-frame">
-          {/* simple “window bar” at top */}
-          <div className="project-frame-bar">
-            <span />
-            <span />
-            <span />
-          </div>
-
-          <div className="project-frame-inner">
-            {projects[currentProject].video ? (
-              <video
-                key={projects[currentProject].video}
-                src={projects[currentProject].video}
-                controls
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-            ) : (
-              <img
-                src={projects[currentProject].image}
-                alt={projects[currentProject].title}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
+    )}
   </div>
 </section>
+
 
         {/* Technical Skills Section */}
         <section id="skills" style={{
@@ -671,17 +701,111 @@ useEffect(() => {
       </div>
 
      <style jsx>{`
-         .project-shell {
-    background: rgba(10, 11, 15, 0.95);
-    border-radius: 28px;
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    padding: 2.5rem 2.5rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.2fr);
-    gap: 3rem;
-    align-items: stretch;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+       .project-tabs-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 2rem;
   }
+
+  .project-tab-button {
+    background: rgba(15, 16, 22, 0.9);
+    border-radius: 999px;
+    border: 1px solid ${PALETTE.border};
+    color: ${PALETTE.inkDim};
+    font-size: 0.9rem;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .project-tab-button:hover {
+    border-color: ${PALETTE.red};
+    color: ${PALETTE.red};
+  }
+
+  .project-tab-button.active {
+    background: ${PALETTE.red};
+    border-color: ${PALETTE.red};
+    color: #fff;
+    box-shadow: 0 0 14px rgba(225, 29, 46, 0.6);
+  }
+
+  .project-dropdown-panel {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(10, 11, 15, 0.96);
+    border-radius: 24px;
+    border: 1px solid ${PALETTE.border};
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.6);
+    padding: 1.8rem 1.8rem 1.5rem;
+  }
+
+  .project-dropdown-header h3 {
+    margin: 0 0 1.2rem;
+    font-size: 1.4rem;
+    color: #fff;
+  }
+
+  .project-dropdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .project-link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    text-decoration: none;
+    background: rgba(15, 16, 22, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    color: ${PALETTE.ink};
+    transition: all 0.18s ease;
+  }
+
+  .project-link-row:hover:not(.coming-soon) {
+    border-color: ${PALETTE.red};
+    box-shadow: 0 0 14px rgba(225, 29, 46, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .project-link-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .project-link-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .project-link-meta {
+    font-size: 0.8rem;
+    color: ${PALETTE.inkDim};
+  }
+
+  .project-link-arrow {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .project-link-row.coming-soon {
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  @media (max-width: 700px) {
+    .project-dropdown-panel {
+      padding: 1.4rem 1.2rem;
+    }
+  }
+    
 
   .project-copy {
     display: flex;
@@ -753,81 +877,7 @@ useEffect(() => {
     align-items: center;
   }
 
-  .project-frame {
-    width: 100%;
-    max-width: 520px;
-    border-radius: 28px;
-    background: radial-gradient(circle at 10% 0%, rgba(255, 56, 90, 0.4), transparent 55%),
-                #0d0f16;
-    padding: 1.2rem;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
-    transform: rotate(-2deg);
-  }
-
-  .project-frame-bar {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 0.8rem;
-  }
-
-  .project-frame-bar span {
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.25);
-  }
-
-  .project-frame-inner {
-    border-radius: 20px;
-    overflow: hidden;
-    background: #0b0c10;
-  }
-
-  .project-frame-inner video,
-  .project-frame-inner img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-height: 420px;
-    object-fit: cover;
-  }
-
-  /* nav dots (1 2 3 4) */
-  .project-nav {
-    background: transparent;
-    border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.6);
-    color: ${PALETTE.inkDim};
-    font-size: 0.85rem;
-    width: 28px;
-    height: 28px;
-    margin: 0 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .project-nav.active {
-    background: ${PALETTE.red};
-    border-color: ${PALETTE.red};
-    color: #ffffff;
-    box-shadow: 0 0 12px rgba(225, 29, 46, 0.65);
-  }
-
-  .project-nav:hover:not(.active) {
-    border-color: ${PALETTE.red};
-    color: ${PALETTE.red};
-  }
-
-  @media (max-width: 900px) {
-    .project-shell {
-      grid-template-columns: 1fr;
-      padding: 1.8rem 1.5rem;
-    }
-
-    .project-frame {
-      transform: none;
-    }
-  }
+ 
 
        
        .timeline-vert {
