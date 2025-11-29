@@ -39,21 +39,23 @@ const IconLayers = (props) => (
 );
 
 export default function InfraVisionProject() {
+  const basePath = process.env.PUBLIC_URL || "";
+
   const slides = [
     {
       title: "3D Infrastructure Preview",
       caption: "CAD-like bridge model snapshot",
-      src: "/images/infravision-preview-hero.svg",
+      src: `${basePath}/images/infravision-preview-hero.png`,
     },
     {
       title: "Technology Stack",
       caption: "Modern stack bars",
-      src: "/images/infravision-preview-tech.svg",
+      src: `${basePath}/images/infravision-preview-tech.png`,
     },
     {
       title: "How It Works",
       caption: "Upload • Process • Analyze",
-      src: "/images/infravision-preview-workflow.svg",
+      src: `${basePath}/images/infravision-preview-workflow.png`,
     },
   ];
 

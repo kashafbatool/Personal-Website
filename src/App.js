@@ -45,24 +45,70 @@ export default function App() {
     </>
   );
 }
-*/
+
 
 import './App.css';
 import React from 'react';
 import BackgroundFX from './BackgroundFX';
 import KashafPortfolio from './KashafPortfolio';
-//import InfraVisionProject from './InfraVisionProject';
+import InfraVisionProject from './InfraVisionProject';
 
 export default function App() {
   return (
     <>
       <BackgroundFX />
-      {/* Everything else sits above it */}
+      {/* Everything else sits above it *//*}
       <div style={{ position: 'relative', zIndex: 2 }}>
         <KashafPortfolio />
-        {/* <InfraVisionProject /> */}
+        {/* <InfraVisionProject /> *//*}
       </div>
     </>
   );
 }
 
+
+import './App.css';
+import React from 'react';
+import BackgroundFX from './BackgroundFX';
+import InfraVisionProject from './InfraVisionProject';
+import KashafPortfolio from './KashafPortfolio';
+
+export default function App() {
+  const basePath = process.env.PUBLIC_URL || '';
+  const normalizedPath = window.location.pathname.replace(basePath, '') || '/';
+  const isInfraVisionPage = normalizedPath.startsWith('/projects/infra-vision');
+
+  if (isInfraVisionPage) {
+    return (
+      <>
+        <BackgroundFX />
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <InfraVisionProject />
+        </div>
+      </>
+    );
+  }
+
+  return <KashafPortfolio />;
+}
+
+*/
+
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import KashafPortfolio from './KashafPortfolio';
+import InfraVisionProject from './InfraVisionProject';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<KashafPortfolio />} />
+        <Route path="/projects/infra-vision" element={<InfraVisionProject />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;

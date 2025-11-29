@@ -145,7 +145,8 @@ export default function KashafPortfolio() {
   const [isTypingDone, setIsTypingDone] = useState(false);
   const [activeStop, setActiveStop] = useState(0);
   const stopRefs = useRef([]);
- 
+  const basePath = process.env.PUBLIC_URL || '';
+
   // highlight each card as you scroll & move plane
 useEffect(() => {
   const observer = new IntersectionObserver(
@@ -239,12 +240,7 @@ useEffect(() => {
     "Tools": ["Git", "NumPy", "Pandas", "Matplotlib"]
   };
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -303,29 +299,7 @@ useEffect(() => {
         position: 'relative',
         zIndex: 2
       }}>
-        {/* Navigation */}
-        <nav style={{
-          position: 'sticky',
-          top: 20,
-          right: 20,
-          zIndex: 100,
-          backdropFilter: 'saturate(120%) blur(6px)',
-          background: 'rgba(16,17,20,0.25)',
-          border: `1px solid ${PALETTE.border}`,
-          borderRadius: '25px',
-          padding: '10px 20px',
-          marginBottom: '20px',
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px'
-        }}>
-          <button onClick={() => scrollToSection('home')} className="nav-btn">Home</button>
-          <button onClick={() => scrollToSection('about')} className="nav-btn">About</button>
-          <button onClick={() => scrollToSection('projects')} className="nav-btn">Projects</button>
-          <button onClick={() => scrollToSection('gallery')} className="nav-btn">Gallery</button>
-          <button onClick={() => scrollToSection('skills')} className="nav-btn">Skills</button>
-          <button onClick={() => scrollToSection('contact')} className="nav-btn">Contact</button>
-        </nav>
+        
 
         {/* Hero Section */}
         <section
@@ -559,7 +533,7 @@ useEffect(() => {
             const title = item.title || item.name;
             const tech = item.tech;
             const slug = item.slug;
-            const href = slug ? `/projects/${slug}` : "#";
+            const href = slug ? `${basePath}/projects/${slug}` : "#";
 
             return (
               <a
