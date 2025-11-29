@@ -43,6 +43,19 @@ const journey = [
 
 const projects = [
   {
+    title: "InfraVision",
+    tech: "C++, TypeScript, React, Node.js, Kubernetes, Docker, PostgreSQL",
+    description:
+      "3D infrastructure visualization platform with CAD uploads, diagnostics, and scalable cloud processing.",
+    highlights: [
+      "Interactive 3D rendering (Three.js / React Three Fiber)",
+      "Multi-service pipeline deployed on Kubernetes",
+      "Upload-to-analysis workflow with accessible overlays",
+    ],
+    color: PALETTE.red,
+    image: "/images/infravision-preview-hero.svg",
+  },
+  {
     title: "Local Link",
     tech: "React Native, TypeScript, Firebase, Figma",
     description: "Mobile app connecting rural artisans with customers through multilingual interface optimized for low-literacy users.",
@@ -91,6 +104,7 @@ const projectBuckets = [
     label: "Full-Stack Product Engineering",
     items: [
       { ...getProject("Local Link"), slug: "local-link" },
+      { ...getProject("InfraVision"), slug: "infra-vision" },
       { ...getProject("Fresh Start"), slug: "fresh-start" },
       { ...getProject("Alvi Auctioneers Redesign"), slug: "alvi-auctioneers" }
     ]
