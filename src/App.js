@@ -99,6 +99,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import KashafPortfolio from './KashafPortfolio';
 import InfraVisionProject from './InfraVisionProject';
+import LocalLinkProject from './LocalLinkProject';
 
 function App() {
   return (
@@ -106,6 +107,7 @@ function App() {
       <Routes>
         <Route path="/" element={<KashafPortfolio />} />
         <Route path="/projects/infra-vision" element={<InfraVisionProject />} />
+        <Route path="/projects/local-link" element={<LocalLinkProject />} />
       </Routes>
     </Router>
   );

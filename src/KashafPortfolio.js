@@ -106,7 +106,6 @@ const projectBuckets = [
       { ...getProject("Local Link"), slug: "local-link" },
       { ...getProject("InfraVision"), slug: "infra-vision" },
       { ...getProject("Fresh Start"), slug: "fresh-start" },
-      { ...getProject("Alvi Auctioneers Redesign"), slug: "alvi-auctioneers" }
     ]
   },
   {

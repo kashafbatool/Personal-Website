@@ -1,624 +1,464 @@
-import React from "react";
-
-const IconExternalLink = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <path d="M15 3h6v6" />
-    <path d="M10 14 21 3" />
-  </svg>
-);
-
-const IconGithub = (props) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.69-3.88-1.54-3.88-1.54-.53-1.35-1.29-1.71-1.29-1.71-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.26 3.39.97.11-.76.41-1.26.75-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.2 11.2 0 0 1 2.92-.39c.99 0 1.99.13 2.92.39 2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.12 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.69 5.4-5.25 5.68.42.36.8 1.08.8 2.18 0 1.58-.02 2.86-.02 3.26 0 .31.21.68.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
-  </svg>
-);
-
-const IconLayers = (props) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="m12 2 7 4-7 4-7-4Z" />
-    <path d="m19 12-7 4-7-4" />
-    <path d="m19 18-7 4-7-4" />
-  </svg>
-);
+import React, { useState, useEffect } from "react";
 
 export default function InfraVisionProject() {
-  const basePath = process.env.PUBLIC_URL || "";
+  const [scrollY, setScrollY] = useState(0);
 
-  const slides = [
-    {
-      title: "3D Infrastructure Preview",
-      caption: "CAD-like bridge model snapshot",
-      src: `${basePath}/images/infravision-preview-hero.png`,
-    },
-    {
-      title: "Technology Stack",
-      caption: "Modern stack bars",
-      src: `${basePath}/images/infravision-preview-tech.png`,
-    },
-    {
-      title: "How It Works",
-      caption: "Upload • Process • Analyze",
-      src: `${basePath}/images/infravision-preview-workflow.png`,
-    },
-  ];
-
-  const [activeSlide, setActiveSlide] = React.useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div className="infra-page">
-      <div className="infra-container">
-        <div className="infra-grid">
-          {/* LEFT – text */}
-          <div className="infra-left">
-            {/* Small label + icon */}
-            <div className="infra-label-row">
-              <div className="infra-label-icon">
-                <IconLayers className="infra-label-icon-svg" />
-              </div>
-              <div className="infra-label-text">FEATURED PROJECT</div>
-            </div>
+    <div style={{
+      background: '#000',
+      color: '#fff',
+      minHeight: '100vh'
+    }}>
+      {/* Hero Section with Parallax */}
+      <div style={{
+        height: '100vh',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        {/* Animated background layers */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(circle at 50% 50%, #0a4d68 0%, #000 70%)',
+          transform: `scale(${1 + scrollY * 0.0003})`
+        }} />
+        
+        {/* Glitch grid */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            linear-gradient(#00ffff22 2px, transparent 2px),
+            linear-gradient(90deg, #00ffff22 2px, transparent 2px)
+          `,
+          backgroundSize: '100px 100px',
+          opacity: 0.1,
+          transform: `translateY(${scrollY * 0.5}px)`
+        }} />
 
-            {/* Title */}
-            <h1 className="infra-title">InfraVision</h1>
+        {/* Floating particles */}
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              width: '4px',
+              height: '4px',
+              background: i % 2 === 0 ? '#00ffff' : '#ff00ff',
+              borderRadius: '50%',
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: 0.6,
+              boxShadow: `0 0 10px ${i % 2 === 0 ? '#00ffff' : '#ff00ff'}`
+            }}
+          />
+        ))}
 
-            {/* Tech line */}
-            <p className="infra-tech">
-              C++, TypeScript, React, Node.js, Kubernetes, Docker, PostgreSQL
-            </p>
+        {/* Main title */}
+        <div style={{
+          textAlign: 'center',
+          zIndex: 10,
+          transform: `translateY(${scrollY * -0.3}px)`
+        }}>
+          <div style={{
+            fontSize: '20px',
+            fontWeight: '300',
+            letterSpacing: '8px',
+            color: '#00ffff',
+            marginBottom: '20px',
+            textTransform: 'uppercase',
+            textShadow: '0 0 20px #00ffff'
+          }}>
+            Project Showcase
+          </div>
+          
+          <h1 style={{
+            fontSize: 'clamp(60px, 12vw, 140px)',
+            fontWeight: '900',
+            margin: 0,
+            background: 'linear-gradient(45deg, #00ffff, #ff00ff, #00ffff)',
+            backgroundSize: '200% 200%',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            animation: 'gradient 3s ease infinite',
+            textShadow: '0 0 80px rgba(0, 255, 255, 0.5)',
+            letterSpacing: '-2px'
+          }}>
+            INFRAVISION
+          </h1>
 
-            {/* Bullets */}
-            <ul className="infra-bullets">
-              <li>
-                Engineered a cloud-based platform to visualize and analyze 3D
-                infrastructure models (bridges, roads, pipelines), allowing
-                engineers to upload CAD-like geometry files for automated
-                diagnostics and rendering.
-              </li>
-              <li>
-                Containerized services with Docker and deployed a multi-service
-                pipeline on Kubernetes, enabling scalable processing of large
-                infrastructure files.
-              </li>
-            </ul>
-
-            {/* CTA buttons */}
-            <div className="infra-cta-row">
-              <button className="infra-btn-primary">
-                Live Demo
-                <IconExternalLink className="infra-btn-icon" />
-              </button>
-
-              <button className="infra-btn-secondary">
-                View Code
-                <IconGithub className="infra-btn-icon" />
-              </button>
-
-              <button className="infra-btn-secondary">
-                Case Study
-                <IconExternalLink className="infra-btn-icon" />
-              </button>
-            </div>
+          <div style={{
+            fontSize: '24px',
+            color: '#888',
+            marginTop: '20px',
+            fontWeight: '300'
+          }}>
+            3D Infrastructure Analysis Platform
           </div>
 
-          {/* RIGHT – blank mockup card */}
-          <div className="infra-right">
-            {/* soft glow */}
-            <div className="infra-glow" />
+          <button
+            onClick={() => window.history.back()}
+            style={{
+              marginTop: '50px',
+              padding: '15px 40px',
+              background: 'transparent',
+              border: '2px solid #00ffff',
+              color: '#00ffff',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              transition: 'all 0.3s ease',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#00ffff';
+              e.currentTarget.style.color = '#000';
+              e.currentTarget.style.boxShadow = '0 0 30px #00ffff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = '#00ffff';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            ← Back Home
+          </button>
+        </div>
 
-            {/* placeholder screen */}
-            <div className="infra-screen-shell">
-              <div className="infra-screen-gradient" />
-              <div className="infra-screen-inner">
-                <div className="infra-screen-grid" />
-                <div className="infra-screen-reflection" />
-                <div className="infra-screen-content">
-                  <img
-                    key={slides[activeSlide].src}
-                    src={slides[activeSlide].src}
-                    alt={slides[activeSlide].caption}
-                    className="infra-screen-image"
-                  />
-                </div>
-                <div className="infra-screen-meta">
-                  <div>
-                    <div className="infra-screen-meta-label">Preview</div>
-                    <div className="infra-screen-meta-title">
-                      {slides[activeSlide].title}
-                    </div>
-                    <div className="infra-screen-meta-caption">
-                      {slides[activeSlide].caption}
-                    </div>
-                  </div>
-                  <div className="infra-screen-dots" role="tablist">
-                    {slides.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`infra-dot ${
-                          activeSlide === index ? "infra-dot-active" : ""
-                        }`}
-                        aria-label={`Show slide ${index + 1}`}
-                        onClick={() => setActiveSlide(index)}
-                        role="tab"
-                        aria-selected={activeSlide === index}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="infra-floating-tags">
-              <span>Three.js</span>
-              <span>React Three Fiber</span>
-              <span>Drei</span>
-              <span>React a11y</span>
-            </div>
-            <div className="infra-sparkles">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
+        {/* Scroll indicator */}
+        <div style={{
+          position: 'absolute',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          animation: 'bounce 2s infinite'
+        }}>
+          <div style={{
+            width: '2px',
+            height: '40px',
+            background: 'linear-gradient(to bottom, transparent, #00ffff)',
+            margin: '0 auto'
+          }} />
         </div>
       </div>
 
-      {/* Local styles for this page */}
+      {/* Content Sections */}
+      <div style={{
+        maxWidth: '1400px',
+        margin: '0 auto',
+        padding: '100px 40px'
+      }}>
+        {/* Tech Stack Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gap: '20px',
+          marginBottom: '100px'
+        }}>
+          {[
+            { name: 'C++', icon: '⚡', color: '#00ffff' },
+            { name: 'TypeScript', icon: '📘', color: '#3178c6' },
+            { name: 'React', icon: '⚛️', color: '#61dafb' },
+            { name: 'Node.js', icon: '🟢', color: '#68a063' },
+            { name: 'Kubernetes', icon: '☸️', color: '#326ce5' },
+            { name: 'Docker', icon: '🐳', color: '#2496ed' },
+            { name: 'PostgreSQL', icon: '🐘', color: '#336791' }
+          ].map((tech, i) => (
+            <div
+              key={tech.name}
+              style={{
+                background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
+                border: '1px solid rgba(0, 255, 255, 0.3)',
+                padding: '30px',
+                textAlign: 'center',
+                borderRadius: '10px',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                transform: scrollY > 300 ? 'translateY(0)' : 'translateY(50px)',
+                opacity: scrollY > 300 ? 1 : 0,
+                transitionDelay: `${i * 0.1}s`
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-10px) scale(1.05)';
+                e.currentTarget.style.boxShadow = `0 20px 40px ${tech.color}44`;
+                e.currentTarget.style.borderColor = tech.color;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.borderColor = 'rgba(0, 255, 255, 0.3)';
+              }}
+            >
+              <div style={{ fontSize: '48px', marginBottom: '10px' }}>{tech.icon}</div>
+              <div style={{ fontSize: '18px', fontWeight: '600', color: tech.color }}>{tech.name}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Feature Showcase - Split Screen */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '60px',
+          marginBottom: '100px'
+        }}>
+          {/* Left - Text */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
+          }}>
+            <div style={{
+              fontSize: '14px',
+              color: '#00ffff',
+              letterSpacing: '4px',
+              marginBottom: '20px',
+              textTransform: 'uppercase'
+            }}>
+              Core Features
+            </div>
+            
+            <h2 style={{
+              fontSize: '48px',
+              fontWeight: '800',
+              marginBottom: '30px',
+              lineHeight: '1.2'
+            }}>
+              Cloud-Based
+              <br />
+              <span style={{ color: '#00ffff' }}>Infrastructure</span>
+              <br />
+              Analysis
+            </h2>
+
+            <div style={{
+              fontSize: '18px',
+              color: '#aaa',
+              lineHeight: '1.8',
+              marginBottom: '30px'
+            }}>
+              Engineered a cloud-based platform for visualizing and analyzing 3D infrastructure models (bridges, roads, and pipelines), 
+              allowing engineers to upload CAD-like geometry files for automated diagnostics and rendering.
+            </div>
+
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '15px'
+            }}>
+              {[
+                'Upload CAD files (STEP, IGES, STL)',
+                'Real-time 3D model rendering',
+                'Automated structural analysis',
+                'AI-powered diagnostics',
+                'Scalable cloud processing'
+              ].map((feature, i) => (
+                <div key={i} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '15px',
+                  padding: '15px',
+                  background: 'rgba(0, 255, 255, 0.05)',
+                  border: '1px solid rgba(0, 255, 255, 0.2)',
+                  borderRadius: '8px',
+                  transform: scrollY > 800 ? 'translateX(0)' : 'translateX(-50px)',
+                  opacity: scrollY > 800 ? 1 : 0,
+                  transition: 'all 0.5s ease',
+                  transitionDelay: `${i * 0.1}s`
+                }}>
+                  <div style={{
+                    width: '8px',
+                    height: '8px',
+                    background: '#00ffff',
+                    borderRadius: '50%',
+                    boxShadow: '0 0 10px #00ffff'
+                  }} />
+                  <span style={{ color: '#ddd' }}>{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right - Visual */}
+          <div style={{
+            position: 'relative',
+            height: '600px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {/* Large 3D visualization mockup */}
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(135deg, #0a1929 0%, #0d1b2a 100%)',
+              borderRadius: '20px',
+              border: '2px solid rgba(0, 255, 255, 0.3)',
+              padding: '40px',
+              position: 'relative',
+              overflow: 'hidden',
+              boxShadow: '0 30px 60px rgba(0, 0, 0, 0.5)'
+            }}>
+              {/* Grid background */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `
+                  linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px)
+                `,
+                backgroundSize: '40px 40px'
+              }} />
+
+              {/* Animated bridge structure */}
+              <svg viewBox="0 0 400 300" style={{
+                width: '100%',
+                height: '100%',
+                position: 'relative',
+                zIndex: 1
+              }}>
+                <defs>
+                  <linearGradient id="bridgeGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#00ffff" />
+                    <stop offset="50%" stopColor="#ff00ff" />
+                    <stop offset="100%" stopColor="#00ffff" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <g filter="url(#glow)">
+                  {/* Main deck */}
+                  <rect x="50" y="150" width="300" height="8" fill="url(#bridgeGlow)" opacity="0.8">
+                    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+                  </rect>
+                  
+                  {/* Cables */}
+                  <line x1="120" y1="80" x2="120" y2="150" stroke="#00ffff" strokeWidth="2" opacity="0.6">
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+                  </line>
+                  <line x1="200" y1="60" x2="200" y2="150" stroke="#00ffff" strokeWidth="3" opacity="0.8">
+                    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" begin="0.5s" />
+                  </line>
+                  <line x1="280" y1="80" x2="280" y2="150" stroke="#00ffff" strokeWidth="2" opacity="0.6">
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" begin="1s" />
+                  </line>
+
+                  {/* Towers */}
+                  <rect x="196" y="60" width="8" height="90" fill="url(#bridgeGlow)" />
+                  <rect x="116" y="80" width="8" height="70" fill="url(#bridgeGlow)" opacity="0.8" />
+                  <rect x="276" y="80" width="8" height="70" fill="url(#bridgeGlow)" opacity="0.8" />
+
+                  {/* Stress indicators */}
+                  <circle cx="200" cy="70" r="12" fill="none" stroke="#ff00ff" strokeWidth="2">
+                    <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx="120" cy="90" r="8" fill="none" stroke="#ffff00" strokeWidth="2">
+                    <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="0.5s" />
+                  </circle>
+                  <circle cx="280" cy="90" r="8" fill="none" stroke="#ffff00" strokeWidth="2">
+                    <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="1s" />
+                  </circle>
+                </g>
+              </svg>
+
+              {/* HUD overlay */}
+              <div style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                background: 'rgba(0, 0, 0, 0.8)',
+                padding: '15px',
+                borderRadius: '8px',
+                border: '1px solid #00ffff',
+                fontFamily: 'monospace',
+                fontSize: '12px'
+              }}>
+                <div style={{ color: '#00ffff', marginBottom: '8px' }}>SYSTEM STATUS</div>
+                <div style={{ color: '#0f0' }}>● Processing Active</div>
+                <div style={{ color: '#fff', marginTop: '8px' }}>Load: 87%</div>
+                <div style={{ color: '#fff' }}>Memory: 2.3GB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Banner */}
+        <div style={{
+          background: 'linear-gradient(90deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1))',
+          border: '1px solid rgba(0, 255, 255, 0.3)',
+          borderRadius: '20px',
+          padding: '60px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: '40px',
+          textAlign: 'center'
+        }}>
+          {[
+            { value: '500ms', label: 'Avg Processing' },
+            { value: '10TB+', label: 'Data Processed' },
+            { value: '99.9%', label: 'Uptime' },
+            { value: '1000+', label: 'Concurrent Users' }
+          ].map((stat, i) => (
+            <div key={i}>
+              <div style={{
+                fontSize: '56px',
+                fontWeight: '900',
+                background: 'linear-gradient(45deg, #00ffff, #ff00ff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '10px'
+              }}>
+                {stat.value}
+              </div>
+              <div style={{
+                fontSize: '14px',
+                color: '#888',
+                textTransform: 'uppercase',
+                letterSpacing: '2px'
+              }}>
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <style>{`
-        .infra-page {
-          position: relative;
-          z-index: 3; /* sit above background FX canvases */
-          min-height: 100vh;
-          background:
-            radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.22), transparent 40%),
-            radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.14), transparent 32%),
-            #05060a;
-          color: #fff;
-          overflow: hidden;
-          perspective: 1200px;
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
-
-        .infra-container {
-          max-width: 1120px;
-          margin: 0 auto;
-          padding: 80px 20px;
-        }
-
-        .infra-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 3.5rem;
-          align-items: center;
-          min-height: 70vh;
-          position: relative;
-        }
-
-        .infra-left,
-        .infra-right {
-          width: 100%;
-        }
-
-        @media (min-width: 900px) {
-          .infra-grid {
-            flex-direction: row;
-            align-items: stretch;
-          }
-          .infra-left,
-          .infra-right {
-            flex: 1;
-          }
-        }
-
-        .infra-left {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-          backdrop-filter: blur(4px);
-          background: rgba(5, 6, 10, 0.35);
-          border: 1px solid rgba(255, 255, 255, 0.04);
-          border-radius: 20px;
-          padding: 20px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-        }
-
-        .infra-label-row {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-        }
-
-        .infra-label-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 14px;
-          background: linear-gradient(135deg, #22d3ee, #2563eb);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .infra-label-icon-svg {
-          width: 28px;
-          height: 28px;
-          color: #fff;
-        }
-
-        .infra-label-text {
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-            "Liberation Mono", "Courier New", monospace;
-          font-size: 11px;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #22d3ee;
-        }
-
-        .infra-title {
-          font-size: clamp(40px, 5vw, 60px);
-          font-weight: 700;
-          line-height: 1.1;
-          margin: 0;
-        }
-
-        .infra-tech {
-          margin: 0;
-          margin-top: 0.5rem;
-          font-size: 13px;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
-          color: #9ca3af;
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-            "Liberation Mono", "Courier New", monospace;
-        }
-
-        .infra-bullets {
-          margin: 1rem 0 0 0;
-          padding-left: 1.1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-          font-size: 15px;
-          line-height: 1.7;
-          color: #e5e7eb;
-        }
-
-        .infra-bullets li {
-          list-style: disc;
-        }
-
-        .infra-cta-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          margin-top: 0.75rem;
-        }
-
-        .infra-btn-primary,
-        .infra-btn-secondary {
-          border-radius: 999px;
-          padding: 0.75rem 1.6rem;
-          font-size: 14px;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          cursor: pointer;
-          border: 1px solid transparent;
-          transition: background 0.2s ease, color 0.2s ease,
-            border-color 0.2s ease, transform 0.15s ease;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        }
-
-        .infra-btn-icon {
-          width: 16px;
-          height: 16px;
-        }
-
-        .infra-btn-primary {
-          background: #fff;
-          color: #000;
-        }
-
-        .infra-btn-primary:hover {
-          background: #e5e7eb;
-          transform: translateY(-1px);
-        }
-
-        .infra-btn-secondary {
-          background: #020617;
-          border-color: #1f2937;
-          color: #e5e7eb;
-        }
-
-        .infra-btn-secondary:hover {
-          border-color: #22d3ee;
-          transform: translateY(-1px);
-        }
-
-        .infra-right {
-          position: relative;
-          height: 420px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          perspective: 1400px;
-        }
-
-        @media (min-width: 900px) {
-          .infra-right {
-            height: 520px;
-          }
-        }
-
-        .infra-glow {
-          position: absolute;
-          width: 320px;
-          height: 320px;
-          border-radius: 999px;
-          background: radial-gradient(
-            circle at 0% 0%,
-            rgba(34, 211, 238, 0.2),
-            transparent 55%
-          );
-          filter: blur(40px);
-        }
-
-        .infra-screen-shell {
-          position: relative;
-          width: 100%;
-          max-width: 500px;
-          height: 280px;
-          border-radius: 32px;
-          background: linear-gradient(135deg, #0b1223, #0f172a 40%, #020617);
-          border: 1px solid rgba(148, 163, 184, 0.55);
-          box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.75),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08),
-            inset 0 -2px 12px rgba(0, 0, 0, 0.6);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transform: rotateY(-14deg) rotateX(6deg);
-          transform-style: preserve-3d;
-          overflow: hidden;
-        }
-
-        @media (min-width: 900px) {
-          .infra-screen-shell {
-            height: 360px;
-          }
-        }
-
-        .infra-screen-gradient {
-          position: absolute;
-          inset: -20% -20% auto -20%;
-          height: 60%;
-          background: radial-gradient(
-            circle at 50% 0%,
-            rgba(59, 130, 246, 0.35),
-            rgba(236, 72, 153, 0.25),
-            transparent 60%
-          );
-          transform: translateZ(20px);
-          filter: blur(10px);
-          opacity: 0.9;
-        }
-
-        .infra-screen-inner {
-          position: relative;
-          width: 88%;
-          height: 78%;
-          border-radius: 24px;
-          background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08), transparent 40%),
-            rgba(9, 12, 22, 0.94);
-          border: 1px solid rgba(55, 65, 81, 0.8);
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.04),
-            inset 0 -2px 12px rgba(0, 0, 0, 0.4);
-          overflow: hidden;
-          transform: translateZ(40px);
-        }
-
-        .infra-screen-grid {
-          position: absolute;
-          inset: 0;
-          background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-          background-size: 32px 32px;
-          opacity: 0.9;
-          transform: translateZ(4px);
-        }
-
-        .infra-screen-reflection {
-          position: absolute;
-          inset: 8%;
-          border-radius: 18px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 55%);
-          mix-blend-mode: screen;
-          transform: translateZ(50px) rotateX(3deg);
-          opacity: 0.7;
-        }
-
-        .infra-screen-content {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transform: translateZ(60px);
-          text-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-        }
-
-        .infra-screen-image {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          border-radius: 18px;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-          border: 1px solid rgba(148, 163, 184, 0.35);
-          background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1), transparent 40%),
-            #0b1020;
-        }
-
-        .infra-screen-meta {
-          position: absolute;
-          inset: auto 10% 8% 10%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1rem;
-          padding: 0.75rem 1rem;
-          background: linear-gradient(90deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7));
-          border: 1px solid rgba(148, 163, 184, 0.3);
-          border-radius: 14px;
-          backdrop-filter: blur(6px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-          transform: translateZ(70px);
-        }
-
-        .infra-screen-meta-label {
-          font-size: 11px;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: #60a5fa;
-        }
-
-        .infra-screen-meta-title {
-          font-weight: 700;
-          color: #e5e7eb;
-          margin-top: 2px;
-        }
-
-        .infra-screen-meta-caption {
-          font-size: 12px;
-          color: #9ca3af;
-        }
-
-        .infra-screen-dots {
-          display: flex;
-          align-items: center;
-          gap: 0.45rem;
-        }
-
-        .infra-dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 999px;
-          background: rgba(255, 255, 255, 0.2);
-          border: 1px solid rgba(148, 163, 184, 0.4);
-          cursor: pointer;
-          transition: transform 0.15s ease, background 0.2s ease;
-        }
-
-        .infra-dot-active {
-          background: linear-gradient(135deg, #22d3ee, #2563eb);
-          transform: scale(1.12);
-        }
-
-        .infra-floating-tags {
-          position: absolute;
-          bottom: 10%;
-          left: 50%;
-          transform: translateX(-50%);
-          display: grid;
-          grid-template-columns: repeat(2, minmax(120px, 1fr));
-          gap: 0.6rem;
-          width: min(460px, 90%);
-          color: #e5e7eb;
-          font-size: 12px;
-        }
-
-        .infra-floating-tags span {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(148, 163, 184, 0.3);
-          border-radius: 999px;
-          padding: 0.55rem 0.9rem;
-          text-align: center;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-          backdrop-filter: blur(4px);
-          transform: translateZ(30px);
-        }
-
-        .infra-sparkles {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          overflow: hidden;
-        }
-
-        .infra-sparkles span {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          background: radial-gradient(circle, rgba(236, 72, 153, 0.7), transparent 70%);
-          border-radius: 999px;
-          opacity: 0.8;
-          animation: float 10s ease-in-out infinite;
-        }
-
-        .infra-sparkles span:nth-child(2) {
-          width: 6px;
-          height: 6px;
-          left: 20%;
-          top: 30%;
-          animation-delay: 2s;
-        }
-
-        .infra-sparkles span:nth-child(3) {
-          width: 14px;
-          height: 14px;
-          left: 70%;
-          top: 10%;
-          animation-delay: 4s;
-        }
-
-        .infra-sparkles span:nth-child(4) {
-          width: 8px;
-          height: 8px;
-          left: 60%;
-          bottom: 20%;
-          animation-delay: 6s;
-        }
-
-        .infra-sparkles span:nth-child(5) {
-          width: 12px;
-          height: 12px;
-          left: 30%;
-          bottom: 5%;
-          animation-delay: 8s;
-        }
-
         @keyframes float {
-          0% {
-            transform: translateZ(80px) translateY(0px) scale(1);
-            opacity: 0.6;
-          }
-          50% {
-            transform: translateZ(120px) translateY(-14px) scale(1.1);
-            opacity: 1;
-          }
-          100% {
-            transform: translateZ(80px) translateY(0px) scale(1);
-            opacity: 0.6;
-          }
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(10px, -20px); }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(-10px); }
         }
       `}</style>
     </div>
