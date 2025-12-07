@@ -13,31 +13,38 @@ const PALETTE = {
 const journey = [
   {
     year: "2005",
-    text: "I entered the world in Islamabad, Pakistan where I grew up watching women carry entire families on their shoulders while being told they had no power. Even before I understood the world, I felt the weight and resilience of the women around me."
+    text: "I was born and raised in Pakistan where I learned the values that continue to shape who I am today",
+    img: "/images/story/slide1-house.png"
   },
   {
     year: "2010",
-    text: "At five, I was mostly busy being dramatic, bossing around my cousins, and asking far too many “why” questions. This was the year I discovered that I liked being in charge of things, even if it was just deciding which game everyone had to play. Looking back, this was probably the earliest sign that I would grow up to challenge every rule handed to me."
+    text: "These values: Hardwork - Faith - Relentlessness became the foundation of everything I pursued",
+    img: "/images/story/slide2-books.png"
   },
   {
     year: "2017",
-    text: "Teenage me started noticing the double standards everywhere. Girls were encouraged to be quiet and agreeable, while boys were expected to lead. Meanwhile, I was out here organizing study groups, giving unsolicited life advice, and asking teachers why girls weren’t encouraged to take on leadership roles. It was my soft launch into women’s empowerment."
+    text: "Teenage me started noticing the double standards everywhere. Girls were encouraged to be quiet and agreeable, while boys were expected to lead. Meanwhile, I was out here organizing study groups, giving unsolicited life advice, and asking teachers why girls weren’t encouraged to take on leadership roles. It was my soft launch into women’s empowerment.",
+    img: "/images/story/slide2-torch.png"
   },
   {
     year: "2020",
-    text: "With the world on pause, I finally had time to reflect. I spent hours reading, writing, and thinking about what I wanted my life to stand for. It was the year I realized that I didn’t just want opportunities for myself - I wanted to help create them for other girls too."
+    text: "With the world on pause, I finally had time to reflect. I spent hours reading, writing, and thinking about what I wanted my life to stand for. It was the year I realized that I didn’t just want opportunities for myself - I wanted to help create them for other girls too.",
+    img: "/images/story/slide4-coffee.png"
   },
   {
     year: "2024",
-    text: "I stepped into leadership roles, tried new things, and accidentally became the person people came to for “advice.” This also marked the year I left home and moved 6000 miles away to Bryn Mawr college on a fully funded scholarship."
+    text: "I stepped into leadership roles, tried new things, and accidentally became the person people came to for “advice.” This also marked the year I left home and moved 6000 miles away to Bryn Mawr college on a fully funded scholarship.",
+    img: "/images/story/slide3-plane.png"
   },
   {
     year: "2025",
-    text: "I now lived in a world full of brilliant women, historic stone buildings, and the occasional existential crisis over problem sets. This was the year I really leaned into building things - projects, communities, confidence, all of it. I took on work that pushed me out of my comfort zone and started shaping my identity not just as a student, but as someone who creates, leads, and makes things happen."
+    text: "I now lived in a world full of brilliant women, historic stone buildings, and the occasional existential crisis over problem sets. This was the year I really leaned into building things - projects, communities, confidence, all of it. I took on work that pushed me out of my comfort zone and started shaping my identity not just as a student, but as someone who creates, leads, and makes things happen.",
+    img: "/images/story/slide4-laptop-light.png"
   },
   {
     year: "Present",
-    text: "Now I’m continuing that work at Bryn Mawr. I’m building projects that blend tech, community, and creativity, mentoring when I can, and learning from people who inspire me every day. I’m surrounded by women who redefine what strength and ambition look like, and it has made me more intentional about the impact I want to have. I’m still experimenting, still messing up, still learning, and still growing - but everything I do now feels aligned with the person I’m becoming and the work I care about most."
+    text: "Now I’m continuing that work at Bryn Mawr. I’m building projects that blend tech, community, and creativity, mentoring when I can, and learning from people who inspire me every day. I’m surrounded by women who redefine what strength and ambition look like, and it has made me more intentional about the impact I want to have. I’m still experimenting, still messing up, still learning, and still growing - but everything I do now feels aligned with the person I’m becoming and the work I care about most.",
+    img: "/images/story/slide5-builder-cloud.png"
   }
 ];
 
@@ -292,12 +299,16 @@ useEffect(() => {
       />
       
       {/* Scrollable content */}
-      <div style={{ 
-        height: '100vh', 
-        overflowY: 'auto', 
-        position: 'relative',
-        zIndex: 2
-      }}>
+<div
+  className="main-scroll"
+  style={{ 
+    height: '100vh', 
+    overflowY: 'auto', 
+    position: 'relative',
+    zIndex: 2
+  }}
+>
+
         
 
         {/* Hero Section */}
@@ -465,15 +476,28 @@ useEffect(() => {
       >
         {journey.map((stop, index) => (
           <article
-            key={stop.title}
+            key={stop.year}
             data-index={index}
-            ref={el => (stopRefs.current[index] = el)}
+            ref={(el) => (stopRefs.current[index] = el)}
             className={`story-card ${index === activeStop ? "is-active" : ""}`}
           >
-            <h3>{stop.title}</h3>
-            <p>{stop.text}</p>
+            <div className="story-text">
+              <h3>{stop.year}</h3>
+              <p>{stop.text}</p>
+            </div>
+
+            {stop.img && (
+              <div className="story-image-wrap">
+                <img
+                  src={stop.img}
+                  alt={stop.year}
+                  className="story-illustration"
+                />
+              </div>
+            )}
           </article>
         ))}
+
       </div>
     </div>
   </div>
@@ -688,6 +712,82 @@ useEffect(() => {
       </div>
 
      <style jsx>{`
+        .main-scroll {
+    scroll-snap-type: y proximity;
+  }
+  .story-card {
+  background: radial-gradient(circle at 0% 0%, rgba(255, 56, 90, 0.06), transparent 45%),
+    rgba(16, 17, 20, 0.94);
+  border-radius: 22px;
+  padding: 2.2rem;
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.2rem;
+  align-items: center;
+  min-height: 60vh;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease, background 0.25s ease;
+}
+
+.story-card h3 {
+  margin: 0 0 0.9rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.story-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.story-card.is-active {
+  border-color: #ff385a;
+  box-shadow: 0 0 22px rgba(255, 56, 90, 0.3);
+  transform: translateY(-4px);
+}
+.story-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story-illustration {
+  max-width: 100%;
+  width: 90%;
+  height: auto;
+  border-radius: 18px;
+  background: #050608;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* Mobile: stack text + drawing */
+@media (max-width: 800px) {
+  .story-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .story-image-wrap {
+    margin-top: 1.5rem;
+  }
+}
+
+
+      
+.story-card:not(.is-active) .story-illustration {
+  opacity: 0.4;
+  filter: grayscale(0.4);
+}
+
+.story-card.is-active .story-illustration {
+  opacity: 1;
+  transform: scale(1.02);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
        .project-tabs-row {
     display: flex;
     flex-wrap: wrap;
