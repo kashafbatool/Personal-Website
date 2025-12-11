@@ -12,38 +12,28 @@ const PALETTE = {
 
 const journey = [
   {
-    year: "2005",
     text: "I was born and raised in Pakistan where I learned the values that continue to shape who I am today",
-    img: "/images/story/slide1-house.png"
+    img: "/images/story/slide1-house.png",
+    img2: "/images/story/slide1-flag.png"
   },
   {
-    year: "2010",
     text: "These values: Hardwork - Faith - Relentlessness became the foundation of everything I pursued",
-    img: "/images/story/slide2-books.png"
+    img: "/images/story/slide2-books.png",
+    img2: "/images/story/slide2-exclamation.png"
   },
   {
-    year: "2017",
-    text: "Teenage me started noticing the double standards everywhere. Girls were encouraged to be quiet and agreeable, while boys were expected to lead. Meanwhile, I was out here organizing study groups, giving unsolicited life advice, and asking teachers why girls weren’t encouraged to take on leadership roles. It was my soft launch into women’s empowerment.",
-    img: "/images/story/slide2-torch.png"
+    text: "They are the reason I earned a full ride scholarship to Bryn Mawr College, and at the age of 19 I left home in the chase of biggeer dreams",
+    img: "/images/story/slide3-plane.png",
+    img2: "/images/story/slide3-suitcase.png",
+    img3: "/images/story/slide3-use-pakistan.png"
   },
   {
-    year: "2020",
-    text: "With the world on pause, I finally had time to reflect. I spent hours reading, writing, and thinking about what I wanted my life to stand for. It was the year I realized that I didn’t just want opportunities for myself - I wanted to help create them for other girls too.",
-    img: "/images/story/slide4-coffee.png"
+    text: "During my first semester, I took my first cs class and I have genuinely fallen in love with the subject",
+    img: "/images/story/slide4-coffee.png",
+    img2: "/images/story/slide4-laptop-light.png" 
   },
   {
-    year: "2024",
-    text: "I stepped into leadership roles, tried new things, and accidentally became the person people came to for “advice.” This also marked the year I left home and moved 6000 miles away to Bryn Mawr college on a fully funded scholarship.",
-    img: "/images/story/slide3-plane.png"
-  },
-  {
-    year: "2025",
-    text: "I now lived in a world full of brilliant women, historic stone buildings, and the occasional existential crisis over problem sets. This was the year I really leaned into building things - projects, communities, confidence, all of it. I took on work that pushed me out of my comfort zone and started shaping my identity not just as a student, but as someone who creates, leads, and makes things happen.",
-    img: "/images/story/slide4-laptop-light.png"
-  },
-  {
-    year: "Present",
-    text: "Now I’m continuing that work at Bryn Mawr. I’m building projects that blend tech, community, and creativity, mentoring when I can, and learning from people who inspire me every day. I’m surrounded by women who redefine what strength and ambition look like, and it has made me more intentional about the impact I want to have. I’m still experimenting, still messing up, still learning, and still growing - but everything I do now feels aligned with the person I’m becoming and the work I care about most.",
+    text: "Determined to learn as much as I could, I started learning different languages, frameworks and tools leading to different tech projects followed by open source contributions and start ups. You can learn more about this journey through scrolling through my work below",
     img: "/images/story/slide5-builder-cloud.png"
   }
 ];
@@ -299,66 +289,65 @@ useEffect(() => {
       />
       
       {/* Scrollable content */}
-<div
-  className="main-scroll"
-  style={{ 
-    height: '100vh', 
-    overflowY: 'auto', 
-    position: 'relative',
-    zIndex: 2
-  }}
->
+      <div
+        className="main-scroll"
+        style={{ 
+          height: '100vh', 
+          overflowY: 'auto', 
+          position: 'relative',
+          zIndex: 2
+        }}
+      >
 
-        
 
         {/* Hero Section */}
         <section
-  id="home"
-  style={{
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0 40px",
-    position: "relative",
-    zIndex: 2
-  }}
->
-  <div
-    style={{
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      alignItems: "center",
-      gap: "60px",
-      maxWidth: "1400px",
-      width: "100%"
-    }}
-  >
-    {/* LEFT SIDE — TEXT */}
-    <div style={{ textAlign: "left" }}>
-      <p
-        style={{
-          color: "#c4c4c4",
-          fontSize: "1rem",
-          letterSpacing: "0.15em",
-          marginBottom: "1rem"
-        }}
-      >
-        Hello, My Name Is
-      </p>
+          id="home"
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 40px",
+            position: "relative",
+            zIndex: 2
+          }}
+        >
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              alignItems: "center",
+              gap: "60px",
+              maxWidth: "1400px",
+              width: "100%"
+            }}
+          >
+            {/* LEFT SIDE — TEXT */}
+            <div style={{ textAlign: "left" }}>
+              <p
+                style={{
+                  color: "#c4c4c4",
+                  fontSize: "1rem",
+                  letterSpacing: "0.15em",
+                  marginBottom: "1rem"
+                }}
+              >
+                Hello, My Name Is
+              </p>
 
-      <h1
-        style={{
-          fontSize: "clamp(3rem, 6vw, 5rem)",
-          fontWeight: "800",
-          color: "#ffffff",
-          margin: 0,
-          lineHeight: 1.1
-        }}
-      >
-        {typedIntro}
-        <span className={`cursor ${isTypingDone ? "done" : ""}`}>|</span>
-      </h1>
+              <h1
+                style={{
+                  fontSize: "clamp(3rem, 6vw, 5rem)",
+                  fontWeight: "800",
+                  color: "#ffffff",
+                  margin: 0,
+                  lineHeight: 1.1
+                }}
+              >
+                {typedIntro}
+                <span className={`cursor ${isTypingDone ? "done" : ""}`}>|</span>
+              </h1>
 
       {/* SMALL SUBTEXT */}
       <p
@@ -403,186 +392,268 @@ useEffect(() => {
 
 
         {/* About Section */}
-        <section
-  id="about"
-  style={{
-    minHeight: "100vh",
-    padding: "120px 20px",
-    position: "relative",
-    zIndex: 2
-  }}
->
-  <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-    <h2
-      style={{
-        textAlign: "center",
-        fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
-        marginBottom: "60px",
-        fontWeight: 800,
-        letterSpacing: "-0.04em",
-        color: "#f5f5f5"
-      }}
-    >
-      About Me
-    </h2>
-
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "260px 1fr",
-        gap: "40px",
-        alignItems: "flex-start"
-      }}
-    >
-      {/* LEFT — vertical timeline */}
-      <div className="timeline-vert">
-        <div className="timeline-track-vert" />
-        <img
-          src="/images/plane.png"  
-          alt="Pink plane"
-          className="timeline-plane-vert"
-          style={{
-            top:
-              journey.length > 1
-                ? `${(activeStop / (journey.length - 1)) * 100}%`
-                : "0%"
-          }}
-        />
-        <div className="timeline-stops-vert">
-          {journey.map((stop, index) => (
-            <button
-              key={stop.year}
-              className={`timeline-dot-vert ${
-                index === activeStop ? "is-active" : ""
-              }`}
-              onClick={() => {
-                setActiveStop(index);
-                const el = stopRefs.current[index];
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-              }}
-            >
-              <span className="timeline-year">{stop.year}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* RIGHT — story cards */}
-      <div
+      <section
+        id="about"
         style={{
-          display: "grid",
-          gap: "24px"
+          minHeight: "100vh",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        {journey.map((stop, index) => (
-          <article
-            key={stop.year}
-            data-index={index}
-            ref={(el) => (stopRefs.current[index] = el)}
-            className={`story-card ${index === activeStop ? "is-active" : ""}`}
-          >
-            <div className="story-text">
-              <h3>{stop.year}</h3>
-              <p>{stop.text}</p>
-            </div>
-
-            {stop.img && (
-              <div className="story-image-wrap">
-                <img
-                  src={stop.img}
-                  alt={stop.year}
-                  className="story-illustration"
-                />
-              </div>
-            )}
-          </article>
-        ))}
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-        {/* Projects Section */}
-<section
-  id="projects"
-  style={{
-    minHeight: "80vh",
-    padding: "120px 20px",
-    background: "rgba(16,17,20,0.25)",
-    backdropFilter: "saturate(120%) blur(6px)"
-  }}
->
-  <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-    <h2
-      style={{
-        fontSize: "clamp(2.5rem, 6vw, 4rem)",
-        textAlign: "center",
-        marginBottom: "2.5rem",
-        fontWeight: "800"
-      }}
-    >
-      Projects
-    </h2>
-
-    {/* category row */}
-    <div className="project-tabs-row">
-      {projectBuckets.map((bucket) => (
-        <button
-          key={bucket.id}
-          className={`project-tab-button ${
-            openBucketId === bucket.id ? "active" : ""
-          }`}
-          onClick={() =>
-            setOpenBucketId(openBucketId === bucket.id ? null : bucket.id)
-          }
+        {/* Sticky header */}
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            maxWidth: "960px",
+            margin: "0 auto",
+            textAlign: "center",
+            padding: "40px 24px 20px",
+            background: "transparent",
+            backdropFilter: "none",
+            zIndex: 100,
+            fontFamily:
+              '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+          }}
         >
-          {bucket.label}
-        </button>
-      ))}
-    </div>
-
-    {/* active dropdown panel */}
-    {activeBucket && (
-      <div className="project-dropdown-panel">
-        <div className="project-dropdown-header">
-          <h3>{activeBucket.label}</h3>
+          <p
+            style={{
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              fontSize: "0.78rem",
+              color: "#e5e5e5",
+              margin: 0,
+            }}
+          >
+            About Me
+          </p>
         </div>
 
-        <div className="project-dropdown-list">
-          {activeBucket.items.map((item, i) => {
-            const title = item.title || item.name;
-            const tech = item.tech;
-            const slug = item.slug;
-            const href = slug ? `${basePath}/projects/${slug}` : "#";
+        {/* Scrollytelling slides */}
+        <div>
+          {journey.map((stop, index) => {
+            const gradients = [
+              "linear-gradient(180deg, #05060a 0%, #ffecd2 40%, #fcb69f 100%)", // 1
+              "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",             // 2
+              "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",             // 3
+              "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",             // 4
+              "linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%)",             // 5
+              "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",             // 6
+              "linear-gradient(135deg, #f8b195 0%, #f67280 100%)",             // 7
+            ];
 
             return (
-              <a
-                key={title + i}
-                href={href}
-                className={`project-link-row ${
-                  !slug ? "coming-soon" : ""
-                }`}
+              <article
+                key={stop.year}
+                data-index={index}
+                ref={(el) => (stopRefs.current[index] = el)}
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  minHeight: "100vh",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "clamp(2rem, 4vw, 3rem)",
+                  overflow: "hidden",
+                  background: gradients[index % gradients.length],
+                  transition: "background 0.8s ease",
+                }}
               >
-                <div className="project-link-main">
-                  <span className="project-link-title">{title}</span>
-                  {tech && (
-                    <span className="project-link-meta">{tech}</span>
+                {/* Floating image 1 */}
+                {stop.img && (
+                  <img
+                    src={stop.img}
+                    alt=""
+                    style={{
+                      position: "absolute",
+                      top: "15%",
+                      left: "8%",
+                      width: "clamp(200px, 25vw, 350px)",
+                      height: "auto",
+                      opacity: index === activeStop ? 0.9 : 0.2,
+                      transform:
+                        index === activeStop
+                          ? "translate(0, 0) scale(1)"
+                          : "translate(-50px, 50px) scale(0.85)",
+                      transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                      animation:
+                        index === activeStop ? "float1 8s ease-in-out infinite" : "none",
+                      zIndex: 1,
+                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.15))",
+                    }}
+                  />
+                )}
+
+                {/* Floating image 2 */}
+                {stop.img2 && (
+                  <img
+                    src={stop.img2}
+                    alt=""
+                    style={{
+                      position: "absolute",
+                      bottom: "20%",
+                      right: "10%",
+                      width: "clamp(180px, 22vw, 300px)",
+                      height: "auto",
+                      opacity: index === activeStop ? 0.85 : 0.2,
+                      transform:
+                        index === activeStop
+                          ? "translate(0, 0) scale(1) rotate(3deg)"
+                          : "translate(50px, -50px) scale(0.85) rotate(-8deg)",
+                      transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                      animation:
+                        index === activeStop ? "float2 10s ease-in-out infinite" : "none",
+                      zIndex: 1,
+                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.15))",
+                    }}
+                  />
+                )}
+
+                {/* Text content */}
+                <div
+                  className="about-story-text"
+                  style={{
+                    position: "relative",
+                    zIndex: 10,
+                    maxWidth: "700px",
+                    textAlign: "center",
+                    transform: index === activeStop ? "scale(1)" : "scale(0.95)",
+                    opacity: index === activeStop ? 1 : 0.4,
+                    transition: "all 0.6s ease",
+                    fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                  }}
+                >
+                  <p
+                    style={{
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      fontSize: "0.9rem",
+                      color: "#999",
+                      margin: "0 0 1rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    {stop.year}
+                  </p>
+
+                  {/* special layout for SECOND slide (values) */}
+                  {index === 1 ? (
+                    <p
+                      style={{
+                        color: "#333",
+                        lineHeight: "1.8",
+                        margin: 0,
+                        fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
+                        fontWeight: 300,
+                      }}
+                    >
+                      <span>These values:</span>
+                      <br />
+                      <span style={{ color: "#e11d2e", fontWeight: 700 }}>
+                        Hardwork – Faith – Relentlessness
+                      </span>
+                      <br />
+                      <span>became the foundation of everything I pursued.</span>
+                    </p>
+                  ) : (
+                    <p
+                      style={{
+                        color: "#333",
+                        lineHeight: "1.8",
+                        margin: 0,
+                        fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
+                        fontWeight: 300,
+                      }}
+                    >
+                      {stop.text}
+                    </p>
                   )}
                 </div>
-                <span className="project-link-arrow">
-                  {slug ? "↗" : "…"}
-                </span>
-              </a>
+              </article>
             );
           })}
         </div>
-      </div>
-    )}
-  </div>
-</section>
+      </section>
+
+      {/* Projects Section */}
+      <section
+        id="projects"
+        style={{
+          minHeight: "80vh",
+          padding: "120px 20px",
+          background: "rgba(16,17,20,0.25)",
+          backdropFilter: "saturate(120%) blur(6px)"
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              textAlign: "center",
+              marginBottom: "2.5rem",
+              fontWeight: "800"
+            }}
+          >
+            Projects
+          </h2>
+
+          {/* category row */}
+          <div className="project-tabs-row">
+            {projectBuckets.map((bucket) => (
+              <button
+                key={bucket.id}
+                className={`project-tab-button ${
+                  openBucketId === bucket.id ? "active" : ""
+                }`}
+                onClick={() =>
+                  setOpenBucketId(openBucketId === bucket.id ? null : bucket.id)
+                }
+              >
+                {bucket.label}
+              </button>
+            ))}
+          </div>
+
+          {/* active dropdown panel */}
+          {activeBucket && (
+            <div className="project-dropdown-panel">
+              <div className="project-dropdown-header">
+                <h3>{activeBucket.label}</h3>
+              </div>
+
+              <div className="project-dropdown-list">
+                {activeBucket.items.map((item, i) => {
+                  const title = item.title || item.name;
+                  const tech = item.tech;
+                  const slug = item.slug;
+                  const href = slug ? `${basePath}/projects/${slug}` : "#";
+
+                  return (
+                    <a
+                      key={title + i}
+                      href={href}
+                      className={`project-link-row ${
+                        !slug ? "coming-soon" : ""
+                      }`}
+                    >
+                      <div className="project-link-main">
+                        <span className="project-link-title">{title}</span>
+                        {tech && (
+                          <span className="project-link-meta">{tech}</span>
+                        )}
+                      </div>
+                      <span className="project-link-arrow">
+                        {slug ? "↗" : "…"}
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
 
 
         {/* Technical Skills Section */}
@@ -715,80 +786,212 @@ useEffect(() => {
         .main-scroll {
     scroll-snap-type: y proximity;
   }
-  .story-card {
-  background: radial-gradient(circle at 0% 0%, rgba(255, 56, 90, 0.06), transparent 45%),
-    rgba(16, 17, 20, 0.94);
-  border-radius: 22px;
-  padding: 2.2rem;
-  color: #e5e7eb;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 2.2rem;
-  align-items: center;
-  min-height: 60vh;
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    border-color 0.25s ease, background 0.25s ease;
+
+
+ .about-section {
+  background: radial-gradient(circle at 10% 20%, rgba(255, 56, 90, 0.08), transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.06), transparent 35%),
+    rgba(5, 6, 8, 0.6);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.story-card h3 {
-  margin: 0 0 0.9rem;
-  font-size: 1.6rem;
-  font-weight: 700;
+.immersive-intro {
+  max-width: 960px;
+  margin: 0 auto 48px;
+  text-align: center;
+  padding: 0 24px;
 }
 
-.story-card p {
-  font-size: 1rem;
-  line-height: 1.7;
+.eyebrow {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: ${PALETTE.inkDim};
+  margin: 0 0 0.5rem;
 }
 
-.story-card.is-active {
-  border-color: #ff385a;
-  box-shadow: 0 0 22px rgba(255, 56, 90, 0.3);
-  transform: translateY(-4px);
+.scrolly-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
+  letter-spacing: -0.04em;
 }
-.story-image-wrap {
+
+.scrolly-copy {
+  margin: 0 0 1.5rem;
+  color: ${PALETTE.inkDim};
+  line-height: 1.6;
+}
+
+.immersive-stack {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 36px;
 }
 
-.story-illustration {
-  max-width: 100%;
-  width: 90%;
-  height: auto;
-  border-radius: 18px;
-  background: #050608;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.4);
+.story-immersive {
+  position: relative;
+  min-height: 100vh;
+  border-radius: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  background-size: 115%;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(2rem, 4vw, 3rem);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+  animation: slow-pan 16s ease-in-out infinite alternate;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background-size 0.6s ease;
 }
 
-/* Mobile: stack text + drawing */
-@media (max-width: 800px) {
-  .story-card {
-    grid-template-columns: 1fr;
-    min-height: auto;
+.story-immersive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,6,8,0.2) 0%, rgba(5,6,8,0.85) 60%, rgba(5,6,8,0.92) 100%);
+  z-index: 1;
+}
+
+.story-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.story-bloom {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle at center, rgba(225,29,46,0.25), transparent 60%);
+  animation: bloom 10s ease-in-out infinite;
+}
+
+.story-bloom.delay {
+  animation-delay: 5s;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 55%);
+}
+
+.story-frame {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.panel-label {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: ${PALETTE.inkDim};
+  margin: 0 0 0.4rem;
+}
+
+.story-headline {
+  margin: 0 0 1rem;
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.panel-body {
+  color: ${PALETTE.inkDim};
+  line-height: 1.7;
+  margin: 0;
+}
+.about-story-text {
+  font-family: "Playfair Display", "Times New Roman", serif !important;
+}
+
+.story-content {
+  position: relative;
+  z-index: 3;
+  max-width: 720px;
+  background: rgba(5,6,8,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: clamp(1.6rem, 3vw, 2.3rem);
+  border-radius: 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+}
+
+.floating-asset {
+  position: absolute;
+  right: clamp(1rem, 4vw, 2rem);
+  top: 10%;
+  z-index: 3;
+  filter: drop-shadow(0 18px 45px rgba(0,0,0,0.45));
+  animation: float 12s ease-in-out infinite;
+}
+
+.floating-asset img {
+  max-width: min(360px, 40vw);
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.story-immersive.is-active {
+  border-color: ${PALETTE.red};
+  box-shadow: 0 34px 110px rgba(225,29,46,0.38);
+  transform: translateY(-8px);
+  background-size: 118%;
+}
+
+.story-immersive:not(.is-active) {
+  filter: grayscale(0.1) brightness(0.9);
+}
+
+@keyframes slow-pan {
+  from { background-position: 48% 48%; }
+  to { background-position: 52% 56%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-12px) scale(1.02); }
+}
+
+@keyframes bloom {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.8; }
+}
+
+@media (max-width: 980px) {
+  .story-immersive {
+    min-height: 90vh;
   }
 
-  .story-image-wrap {
-    margin-top: 1.5rem;
+  .floating-asset {
+    position: static;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .story-content {
+    background: rgba(5,6,8,0.82);
   }
 }
 
+@media (max-width: 720px) {
+  .story-immersive {
+    padding: 1.4rem;
+    border-radius: 18px;
+  }
 
-      
-.story-card:not(.is-active) .story-illustration {
-  opacity: 0.4;
-  filter: grayscale(0.4);
+  .story-content {
+    padding: 1.25rem;
+  }
+
+  .floating-asset img {
+    max-width: 240px;
+  }
 }
 
-.story-card.is-active .story-illustration {
-  opacity: 1;
-  transform: scale(1.02);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-       .project-tabs-row {
+  .project-tabs-row {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -1064,8 +1267,41 @@ useEffect(() => {
       display: none;   /* hide vertical timeline on small screens if you want */
     }
   }
+      @keyframes float1 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+  }
+  50% { 
+    transform: translate(-20px, -30px) scale(1.05); 
+  }
+}
 
-        .timeline {
+@keyframes float2 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1) rotate(5deg); 
+  }
+  50% { 
+    transform: translate(20px, 30px) scale(1.05) rotate(-5deg); 
+  }
+}
+@keyframes float1 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+  }
+  50% { 
+    transform: translate(-15px, -25px) scale(1.03); 
+  }
+}
+
+@keyframes float2 {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1) rotate(3deg); 
+  }
+  50% { 
+    transform: translate(15px, 25px) scale(1.03) rotate(-3deg); 
+  }
+}
+.timeline {
     position: relative;
     margin: 0 auto;
     max-width: 900px;
@@ -1269,6 +1505,14 @@ useEffect(() => {
     border-color: ${PALETTE.red};
     outline: none;
   }
+      .about-story-text {
+    font-family: "Times New Roman", Georgia, serif !important;
+  }
+
+  .about-story-text p {
+    font-family: inherit !important;
+  }
+
 `}</style>
     </div>
   );
