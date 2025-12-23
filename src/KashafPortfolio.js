@@ -164,31 +164,6 @@ export default function KashafPortfolio() {
   return () => observer.disconnect();
 }, []);
 */
-useEffect(() => {
-  const handleScroll = () => {
-    const aboutSection = document.getElementById('about');
-    if (!aboutSection) return;
-
-    const rect = aboutSection.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    
-    const scrollStart = -rect.top;
-    const scrollRange = rect.height - viewportHeight;
-    const progress = Math.max(0, Math.min(1, scrollStart / scrollRange));
-    
-    const pageIndex = Math.floor(progress * journey.length);
-    const clampedIndex = Math.max(0, Math.min(journey.length - 1, pageIndex));
-    
-    setActiveStop(clampedIndex);
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
-  
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
-
-
   // Mouse trail effect
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -260,30 +235,40 @@ useEffect(() => {
 
 
   useEffect(() => {
-  const container = document.querySelector(".main-scroll");
-  if (!container || !aboutRef.current) return;
 
-  const onScroll = () => {
+    const container = scrollRef.current;
     const section = aboutRef.current;
+    if (!container || !section) return;
 
-    // About section position relative to the scroll container
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.offsetHeight;
-    const scrollTop = container.scrollTop;
+    const computeActiveStop = () => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.scrollHeight;
+      const scrollTop = container.scrollTop;
+      const viewportHeight = container.clientHeight;
 
-    // progress = 0 at start of about, 1 at end of about
-    const raw = (scrollTop - sectionTop) / (sectionHeight - container.clientHeight);
-    const progress = Math.min(1, Math.max(0, raw));
+      // Start the progression slightly before the section hits the viewport
+      const start = sectionTop - viewportHeight * 0.15;
+      const end = sectionTop + sectionHeight - viewportHeight * 0.5;
+      const travel = end - start;
 
-    const idx = Math.round(progress * (journey.length - 1));
-    setActiveStop(idx);
-  };
+       if (travel <= 0) return setActiveStop(0);
 
-  onScroll(); // run once
-  container.addEventListener("scroll", onScroll, { passive: true });
-  return () => container.removeEventListener("scroll", onScroll);
-}, [journey.length]);
+       const rawProgress = (scrollTop - start) / travel;
+      const progress = Math.min(1, Math.max(0, rawProgress));
+      const newIndex = Math.round(progress * (journey.length - 1));
 
+      setActiveStop(newIndex);
+    };
+
+    computeActiveStop();
+    container.addEventListener("scroll", computeActiveStop, { passive: true });
+    window.addEventListener("resize", computeActiveStop);
+
+    return () => {
+      container.removeEventListener("scroll", computeActiveStop);
+      window.removeEventListener("resize", computeActiveStop);
+    };
+  }, [journey.length]);
 
   const skills = {
     "Programming": ["Python", "JavaScript", "Java", "TypeScript"],
@@ -316,7 +301,7 @@ useEffect(() => {
       fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
       minHeight: '100vh',
       color: '#fff',
-      //overflow: 'hidden',
+      overflow: 'hidden',
       position: 'relative',
       //background: PALETTE.bg0
     }}>
@@ -448,9 +433,9 @@ useEffect(() => {
           ref={aboutRef}
           id="about"
           style={{
-            minHeight: `${journey.length * 100}vh`, // enough scroll for each page
+            minHeight: `${journey.length * 120}vh`, // enough scroll for each page
             position: "relative",
-            zIndex: 2,
+            zIndex: 2, 
             background: "rgba(11,11,13,0.6)",
             backdropFilter: "blur(8px)",
             paddingTop: "100px",
