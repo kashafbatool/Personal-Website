@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import AboutBook from "./AboutBook";
 
 const PALETTE = {
   bg0: '#0b0b0d',
@@ -139,10 +140,11 @@ export default function KashafPortfolio() {
   const [formStatus, setFormStatus] = useState('');
   const [typedIntro, setTypedIntro] = useState("");
   const [isTypingDone, setIsTypingDone] = useState(false);
-  const [activeStop, setActiveStop] = useState(0);
+  //const [activeStop, setActiveStop] = useState(0);
+  //const [pageProgress, setPageProgress] = useState(0);
   const scrollRef = useRef(null);   // your main scroll container
   const aboutRef = useRef(null);    // the about section
-  const stopRefs = useRef([]);
+  //const stopRefs = useRef([]);
   const basePath = process.env.PUBLIC_URL || '';
 
   // highlight each card as you scroll & move plane
@@ -233,7 +235,7 @@ export default function KashafPortfolio() {
 
   
 
-
+/*
   useEffect(() => {
 
     const container = scrollRef.current;
@@ -241,6 +243,7 @@ export default function KashafPortfolio() {
     if (!container || !section) return;
 
     const computeActiveStop = () => {
+      const { top } = section.getBoundingClientRect();
       const sectionTop = section.offsetTop;
       const sectionHeight = section.scrollHeight;
       const scrollTop = container.scrollTop;
@@ -251,13 +254,14 @@ export default function KashafPortfolio() {
       const end = sectionTop + sectionHeight - viewportHeight * 0.5;
       const travel = end - start;
 
-       if (travel <= 0) return setActiveStop(0);
+      const rawProgress = (scrollTop - start) / travel;
+      const clamped = Math.min(1, Math.max(0, rawProgress));
+       
+      const turns = journey.length - 1;
+      const scaledProgress = clamped * turns;
 
-       const rawProgress = (scrollTop - start) / travel;
-      const progress = Math.min(1, Math.max(0, rawProgress));
-      const newIndex = Math.round(progress * (journey.length - 1));
-
-      setActiveStop(newIndex);
+      setPageProgress(scaledProgress);
+      setActiveStop(Math.min(turns, Math.max(0, Math.round(scaledProgress))));
     };
 
     computeActiveStop();
@@ -268,8 +272,9 @@ export default function KashafPortfolio() {
       container.removeEventListener("scroll", computeActiveStop);
       window.removeEventListener("resize", computeActiveStop);
     };
-  }, [journey.length]);
-
+  }, []);
+  */
+ 
   const skills = {
     "Programming": ["Python", "JavaScript", "Java", "TypeScript"],
     "Frontend": ["React", "React Native", "HTML/CSS", "Figma"],
@@ -428,395 +433,19 @@ export default function KashafPortfolio() {
 </section>
 
 
-                {/* About Section - Book Page Flip */}
+          {/* About Section - Book Page Flip */} 
+           
+              <AboutBook journey={journey} PALETTE={PALETTE} />
+          
+
+        {/* Projects Section */}
         <section
-          ref={aboutRef}
-          id="about"
+          id="projects"
           style={{
-            minHeight: `${journey.length * 120}vh`, // enough scroll for each page
-            position: "relative",
-            zIndex: 2, 
-            background: "rgba(11,11,13,0.6)",
-            backdropFilter: "blur(8px)",
-            paddingTop: "100px",
-            paddingBottom: "40vh",
-          }}
-        >
-
-
-        <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 20px" }}>
-          <h2
-            style={{
-              fontSize: "clamp(2.5rem, 6vw, 4rem)",
-              textAlign: "center",
-              marginBottom: "80px",
-              fontWeight: "800",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            My Story
-          </h2>
-
-          {/* Sticky Book Container */}
-          <div
-            style={{
-              position: "sticky",
-              top: "100px",
-              maxWidth: "1100px",
-              margin: "0 auto",
-              perspective: "2500px",
-              height: "650px",
-              //marginBottom: "100vh",
-            }}
-          >
-            {journey.map((stop, index) => {
-              const isActive = index === activeStop;
-              const isPast = index < activeStop;
-              const isFuture = index > activeStop;
-
-              return (
-                <div
-                  key={index}
-                  data-index={index}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    width: "100%",
-                    height: "650px",
-                    transformStyle: "preserve-3d",
-                    transformOrigin: "left center",
-                    transition: "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
-                    transform: isPast ? `rotateY(-160deg)` : `rotateY(0deg)`,
-                    opacity: isFuture && index > activeStop + 2 ? 0 : 1,
-                    zIndex: isPast ? 50 - index : isFuture ? 100 - index : 200,
-                    pointerEvents: isActive ? "auto" : "none",
-                  }}
-                >
-                  {/* Page Front */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      backfaceVisibility: "hidden",
-                      background:
-                        "linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(245,245,245,0.98) 100%)",
-                      borderRadius: "0 20px 20px 0",
-                      boxShadow: isActive
-                        ? "0 30px 80px rgba(225,29,46,0.25), 0 0 0 3px rgba(225,29,46,0.4)"
-                        : "0 15px 50px rgba(0,0,0,0.2)",
-                      borderLeft: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      padding: "60px 70px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1.2fr",
-                        gap: "70px",
-                        alignItems: "center",
-                        width: "100%",
-                      }}
-                    >
-                      {/* Left Side - Text */}
-                      <div>
-                        {/* Big Chapter Number */}
-                        <div
-                          style={{
-                            fontSize: "7rem",
-                            fontWeight: "900",
-                            color: "rgba(225,29,46,0.08)",
-                            lineHeight: "0.9",
-                            fontFamily: "Georgia, serif",
-                            marginBottom: "15px",
-                          }}
-                        >
-                          {String(index + 1).padStart(2, "0")}
-                        </div>
-
-                        {/* Chapter Badge */}
-                        <div
-                          style={{
-                            display: "inline-block",
-                            padding: "8px 24px",
-                            background: PALETTE.red,
-                            borderRadius: "30px",
-                            marginBottom: "28px",
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontSize: "0.65rem",
-                              color: "#fff",
-                              letterSpacing: "0.2em",
-                              textTransform: "uppercase",
-                              fontWeight: "700",
-                            }}
-                          >
-                            CHAPTER {index + 1}
-                          </span>
-                        </div>
-
-                        {/* Story Text */}
-                        {index === 1 ? (
-                          <div style={{ color: "#1a1a1a" }}>
-                            <p
-                              style={{
-                                fontSize: "1rem",
-                                lineHeight: "1.9",
-                                margin: "0 0 18px",
-                                fontFamily: "Georgia, serif",
-                              }}
-                            >
-                              These values:
-                            </p>
-                            <p
-                              style={{
-                                fontSize: "1.3rem",
-                                fontWeight: "700",
-                                color: PALETTE.red,
-                                margin: "0 0 18px",
-                                lineHeight: "1.5",
-                                fontFamily: "Georgia, serif",
-                              }}
-                            >
-                              Hardwork – Faith – Relentlessness
-                            </p>
-                            <p
-                              style={{
-                                fontSize: "1rem",
-                                lineHeight: "1.9",
-                                margin: 0,
-                                fontFamily: "Georgia, serif",
-                              }}
-                            >
-                              became the foundation of everything I pursued.
-                            </p>
-                          </div>
-                        ) : (
-                          <p
-                            style={{
-                              fontSize: "1rem",
-                              lineHeight: "1.9",
-                              color: "#1a1a1a",
-                              margin: 0,
-                              fontFamily: "Georgia, serif",
-                            }}
-                          >
-                            {stop.text}
-                          </p>
-                        )}
-
-                        {/* Page Number */}
-                        <div
-                          style={{
-                            marginTop: "35px",
-                            paddingTop: "18px",
-                            borderTop: "2px solid rgba(225,29,46,0.15)",
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontSize: "0.8rem",
-                              color: PALETTE.red,
-                              fontFamily: "Georgia, serif",
-                              fontStyle: "italic",
-                            }}
-                          >
-                            Page {index + 1} of {journey.length}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Right Side - Images */}
-                      <div
-                        style={{
-                          position: "relative",
-                          minHeight: "450px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        {stop.img && (
-                          <img
-                            src={stop.img}
-                            alt=""
-                            style={{
-                              position: "relative",
-                              maxWidth: "100%",
-                              width: "360px",
-                              height: "auto",
-                              borderRadius: "12px",
-                              boxShadow: "0 20px 60px rgba(0,0,0,0.25)",
-                              border: "10px solid #fff",
-                              zIndex: 3,
-                            }}
-                          />
-                        )}
-
-                        {stop.img2 && (
-                          <img
-                            src={stop.img2}
-                            alt=""
-                            style={{
-                              position: "absolute",
-                              bottom: "-25px",
-                              right: "-25px",
-                              maxWidth: "200px",
-                              width: "48%",
-                              height: "auto",
-                              borderRadius: "10px",
-                              boxShadow: "0 15px 40px rgba(0,0,0,0.2)",
-                              border: "8px solid #fff",
-                              zIndex: 2,
-                              transform: "rotate(8deg)",
-                            }}
-                          />
-                        )}
-
-                        {stop.img3 && (
-                          <img
-                            src={stop.img3}
-                            alt=""
-                            style={{
-                              position: "absolute",
-                              top: "-20px",
-                              left: "-20px",
-                              maxWidth: "150px",
-                              width: "36%",
-                              height: "auto",
-                              borderRadius: "8px",
-                              boxShadow: "0 12px 30px rgba(0,0,0,0.18)",
-                              border: "6px solid #fff",
-                              zIndex: 1,
-                              transform: "rotate(-10deg)",
-                            }}
-                          />
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Page Curl */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                        width: "90px",
-                        height: "90px",
-                        background:
-                          "linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.04) 50%)",
-                        borderBottomRightRadius: "20px",
-                        pointerEvents: "none",
-                      }}
-                    />
-
-                    {/* Book Spine Shadow */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        width: "25px",
-                        background:
-                          "linear-gradient(to right, rgba(0,0,0,0.12), transparent)",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  </div>
-
-                  {/* Page Back (when flipped) */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      backfaceVisibility: "hidden",
-                      transform: "rotateY(180deg)",
-                      background: "rgba(230,230,230,0.95)",
-                      borderRadius: "20px 0 0 20px",
-                      border: "1px solid rgba(200,200,200,0.4)",
-                      borderRight: "none",
-                      boxShadow: "inset 15px 0 20px rgba(0,0,0,0.08)",
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Scroll Hint */}
-          {activeStop === 0 && (
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "-80vh",
-                position: "relative",
-                zIndex: 300,
-                animation: "bounce 2s infinite",
-              }}
-            >
-              <p
-                style={{
-                  color: PALETTE.inkDim,
-                  fontSize: "0.9rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Scroll to flip pages
-              </p>
-              <div style={{ fontSize: "2rem", marginTop: "10px" }}>↓</div>
-            </div>
-          )}
-
-          {/* Scroll Progress Indicator */}
-          <div
-            style={{
-              position: "fixed",
-              bottom: "40px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              gap: "10px",
-              background: "rgba(11,11,13,0.9)",
-              padding: "12px 20px",
-              borderRadius: "30px",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              zIndex: 1000,
-            }}
-          >
-            {journey.map((_, idx) => (
-              <div
-                key={idx}
-                style={{
-                  width: activeStop === idx ? "30px" : "8px",
-                  height: "8px",
-                  borderRadius: "4px",
-                  background:
-                    activeStop === idx ? PALETTE.red : "rgba(255,255,255,0.3)",
-                  transition: "all 0.3s ease",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section
-        id="projects"
-        style={{
-          minHeight: "80vh",
-          padding: "120px 20px",
-          background: "rgba(16,17,20,0.25)",
-          backdropFilter: "saturate(120%) blur(6px)"
+            minHeight: "80vh",
+            padding: "120px 20px",
+            background: "rgba(16,17,20,0.25)",
+            backdropFilter: "saturate(120%) blur(6px)"
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
