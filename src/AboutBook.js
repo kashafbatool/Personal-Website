@@ -4,66 +4,119 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
 
   const bookRef = useRef(null);
 
+  const loadScriptOnce = (src, id) =>
+    new Promise((resolve, reject) => {
+      if (document.querySelector(`script[data-id="${id}"]`)) {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = false; // keep order (jQuery before turn.js)
+      script.dataset.id = id;
+      script.onload = () => resolve();
+      script.onerror = (err) => reject(err);
+      document.body.appendChild(script);
+    });
+  
   useEffect(() => {
     const el = bookRef.current;
     if (!el) return;
 
-    // Turn.js needs jQuery on window
-    const $ = window.$;
-    if (!$ || !$.fn || !$.fn.turn) {
-      console.error("turn.js or jQuery not loaded. Check index.html scripts.");
-      return;
-    }
+    let cancelled = false;
+    let $book;
 
-    const $book = $(el);
+    const initTurn = () => {
+      const $ = window.$;
+      if (!$ || !$.fn || !$.fn.turn) return;
+
+
+        $book = $(el);
 
     // Prevent double-init during React refresh
-    if ($book.data("isTurnInit")) return;
+      if ($book.data("isTurnInit")) return;
 
-    $book.turn({
-      width: 1100,
-      height: 650,
-      autoCenter: true,
-      duration: 700,
-      gradients: true,
-      elevation: 50,
-    });
+      $book.turn({
+        width: 1100,
+        height: 650,
+        autoCenter: true,
+        duration: 700,
+        gradients: true,
+        elevation: 50,
+      });
 
-    $book.data("isTurnInit", true);
+        $book.data("isTurnInit", true);
+      const onResize = () => {
+        // Optional: keep size responsive-ish
+        const w = Math.min(1100, window.innerWidth - 40);
+        const h = Math.min(650, window.innerHeight - 220);
+        $book.turn("size", w, h);
+        $book.turn("center");
+        
+        window.addEventListener("resize", onResize);
+        onResize();
+      };
 
-    const onResize = () => {
-      // Optional: keep size responsive-ish
-      const w = Math.min(1100, window.innerWidth - 40);
-      const h = Math.min(650, window.innerHeight - 220);
-      $book.turn("size", w, h);
-      $book.turn("center");
+      return onResize;
     };
 
-    window.addEventListener("resize", onResize);
-    onResize();
+    const setup = async () => {
+      try {
+        if (!window.jQuery) {
+          await loadScriptOnce(
+            "https://code.jquery.com/jquery-3.7.1.min.js",
+            "jquery-cdn"
+          );
+        }
+
+        if (!window.$?.fn?.turn) {
+          await loadScriptOnce("/vendor/turn.js", "turnjs-local");
+        }
+
+        if (cancelled) return;
+
+        const resizeHandler = initTurn();
+
+        return resizeHandler;
+      } catch (err) {
+        console.error("Failed to load flipbook scripts", err);
+      }
+    };
+
+    let resizeHandler;
+
+    setup().then((handler) => {
+      resizeHandler = handler;
+    });
 
     return () => {
-      window.removeEventListener("resize", onResize);
-      try {
-        $book.turn("destroy");
-      } catch (e) {}
-      $book.removeData("isTurnInit");
+    cancelled = true;
+      const $ = window.$;
+      const cleanupTarget = $book || ($ && el ? $(el) : null);
+      if (resizeHandler) window.removeEventListener("resize", resizeHandler);
+      if (cleanupTarget?.data("turn")) {
+        try {
+          cleanupTarget.turn("destroy");
+        } catch (e) {}
+      }
+      cleanupTarget?.removeData("isTurnInit");
     };
   }, []);
 
   useEffect(() => {
-  const el = bookRef.current;
-  const $ = window.$;
-  if (!el || !$ || !$.fn || !$.fn.turn) return;
+    const el = bookRef.current;
+    const $ = window.$;
+    if (!el || !$ || !$.fn || !$.fn.turn) return;
 
-  const $book = $(el);
+    const $book = $(el);
 
-  // Only if turn is initialized
-  if ($book.data("turn")) {
-    // +2 because page 1 is the cover
-    $book.turn("page", activeStop + 2);
-  }
-}, [activeStop]);
+    // Only if turn is initialized
+    if ($book.data("turn")) {
+      // +2 because page 1 is the cover
+      $book.turn("page", activeStop + 2);
+    }
+  }, [activeStop]);
 
 
 
