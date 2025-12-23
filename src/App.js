@@ -98,19 +98,36 @@ export default function App() {
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import KashafPortfolio from './KashafPortfolio';
+import BackgroundFX from './BackgroundFX';
 import InfraVisionProject from './InfraVisionProject';
 import LocalLinkProject from './LocalLinkProject';
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<KashafPortfolio />} />
-        <Route path="/projects/infra-vision" element={<InfraVisionProject />} />
-        <Route path="/projects/local-link" element={<LocalLinkProject />} />
-      </Routes>
-    </Router>
-  );
-}
+export default function App() {
+  const basePath = process.env.PUBLIC_URL || '';
+  const pathname = window.location.pathname;
+  const normalizedPath = pathname.startsWith(basePath)
+    ? pathname.slice(basePath.length)
+    : pathname;
+  const projectRoutes = {
+    '/projects/infra-vision': InfraVisionProject,
+    '/projects/local-link': LocalLinkProject
+  };
 
-export default App;
+  const matchedProject = Object.entries(projectRoutes).find(([route]) => {
+    return normalizedPath === route || normalizedPath.startsWith(`${route}/`);
+  });
+
+  if (matchedProject) {
+    const ProjectComponent = matchedProject[1];
+    return (
+      <>
+        <BackgroundFX />
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <ProjectComponent />
+        </div>
+      </>
+    );
+  }
+
+  return <KashafPortfolio />;
+}

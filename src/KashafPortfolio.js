@@ -140,17 +140,20 @@ export default function KashafPortfolio() {
   const [typedIntro, setTypedIntro] = useState("");
   const [isTypingDone, setIsTypingDone] = useState(false);
   const [activeStop, setActiveStop] = useState(0);
+  const scrollRef = useRef(null);   // your main scroll container
+  const aboutRef = useRef(null);    // the about section
   const stopRefs = useRef([]);
   const basePath = process.env.PUBLIC_URL || '';
 
   // highlight each card as you scroll & move plane
-useEffect(() => {
+/*
+  useEffect(() => {
   const observer = new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const idx = Number(entry.target.dataset.index);
-          setActiveStop(idx);
+          //setActiveStop(idx);
         }
       });
     },
@@ -160,6 +163,32 @@ useEffect(() => {
   stopRefs.current.forEach(el => el && observer.observe(el));
   return () => observer.disconnect();
 }, []);
+*/
+useEffect(() => {
+  const handleScroll = () => {
+    const aboutSection = document.getElementById('about');
+    if (!aboutSection) return;
+
+    const rect = aboutSection.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    
+    const scrollStart = -rect.top;
+    const scrollRange = rect.height - viewportHeight;
+    const progress = Math.max(0, Math.min(1, scrollStart / scrollRange));
+    
+    const pageIndex = Math.floor(progress * journey.length);
+    const clampedIndex = Math.max(0, Math.min(journey.length - 1, pageIndex));
+    
+    setActiveStop(clampedIndex);
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+  
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+
+
   // Mouse trail effect
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -229,6 +258,33 @@ useEffect(() => {
 
   
 
+
+  useEffect(() => {
+  const container = document.querySelector(".main-scroll");
+  if (!container || !aboutRef.current) return;
+
+  const onScroll = () => {
+    const section = aboutRef.current;
+
+    // About section position relative to the scroll container
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    const scrollTop = container.scrollTop;
+
+    // progress = 0 at start of about, 1 at end of about
+    const raw = (scrollTop - sectionTop) / (sectionHeight - container.clientHeight);
+    const progress = Math.min(1, Math.max(0, raw));
+
+    const idx = Math.round(progress * (journey.length - 1));
+    setActiveStop(idx);
+  };
+
+  onScroll(); // run once
+  container.addEventListener("scroll", onScroll, { passive: true });
+  return () => container.removeEventListener("scroll", onScroll);
+}, [journey.length]);
+
+
   const skills = {
     "Programming": ["Python", "JavaScript", "Java", "TypeScript"],
     "Frontend": ["React", "React Native", "HTML/CSS", "Figma"],
@@ -290,13 +346,9 @@ useEffect(() => {
       
       {/* Scrollable content */}
       <div
+        ref={scrollRef}
         className="main-scroll"
-        style={{ 
-          height: '100vh', 
-          overflowY: 'auto', 
-          position: 'relative',
-          zIndex: 2
-        }}
+        style={{ height: "100vh", overflowY: "auto", position: "relative", zIndex: 2 }}
       >
 
 
@@ -391,188 +443,384 @@ useEffect(() => {
 </section>
 
 
-        {/* About Section */}
-      <section
-        id="about"
-        style={{
-          minHeight: "100vh",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        {/* Sticky header */}
-        <div
+                {/* About Section - Book Page Flip */}
+        <section
+          ref={aboutRef}
+          id="about"
           style={{
-            position: "sticky",
-            top: 0,
-            maxWidth: "960px",
-            margin: "0 auto",
-            textAlign: "center",
-            padding: "40px 24px 20px",
-            background: "transparent",
-            backdropFilter: "none",
-            zIndex: 100,
-            fontFamily:
-              '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+            minHeight: `${journey.length * 100}vh`, // enough scroll for each page
+            position: "relative",
+            zIndex: 2,
+            background: "rgba(11,11,13,0.6)",
+            backdropFilter: "blur(8px)",
+            paddingTop: "100px",
+            paddingBottom: "40vh",
           }}
         >
-          <p
+
+
+        <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 20px" }}>
+          <h2
             style={{
-              letterSpacing: "0.28em",
-              textTransform: "uppercase",
-              fontSize: "0.78rem",
-              color: "#e5e5e5",
-              margin: 0,
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              textAlign: "center",
+              marginBottom: "80px",
+              fontWeight: "800",
+              letterSpacing: "-0.02em",
             }}
           >
-            About Me
-          </p>
-        </div>
+            My Story
+          </h2>
 
-        {/* Scrollytelling slides */}
-        <div>
-          {journey.map((stop, index) => {
-            const gradients = [
-              "linear-gradient(180deg, #05060a 0%, #ffecd2 40%, #fcb69f 100%)", // 1
-              "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",             // 2
-              "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",             // 3
-              "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)",             // 4
-              "linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%)",             // 5
-              "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",             // 6
-              "linear-gradient(135deg, #f8b195 0%, #f67280 100%)",             // 7
-            ];
+          {/* Sticky Book Container */}
+          <div
+            style={{
+              position: "sticky",
+              top: "100px",
+              maxWidth: "1100px",
+              margin: "0 auto",
+              perspective: "2500px",
+              height: "650px",
+              //marginBottom: "100vh",
+            }}
+          >
+            {journey.map((stop, index) => {
+              const isActive = index === activeStop;
+              const isPast = index < activeStop;
+              const isFuture = index > activeStop;
 
-            return (
-              <article
-                key={stop.year}
-                data-index={index}
-                ref={(el) => (stopRefs.current[index] = el)}
-                style={{
-                  position: "sticky",
-                  top: 0,
-                  minHeight: "100vh",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "clamp(2rem, 4vw, 3rem)",
-                  overflow: "hidden",
-                  background: gradients[index % gradients.length],
-                  transition: "background 0.8s ease",
-                }}
-              >
-                {/* Floating image 1 */}
-                {stop.img && (
-                  <img
-                    src={stop.img}
-                    alt=""
-                    style={{
-                      position: "absolute",
-                      top: "15%",
-                      left: "8%",
-                      width: "clamp(200px, 25vw, 350px)",
-                      height: "auto",
-                      opacity: index === activeStop ? 0.9 : 0.2,
-                      transform:
-                        index === activeStop
-                          ? "translate(0, 0) scale(1)"
-                          : "translate(-50px, 50px) scale(0.85)",
-                      transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-                      animation:
-                        index === activeStop ? "float1 8s ease-in-out infinite" : "none",
-                      zIndex: 1,
-                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.15))",
-                    }}
-                  />
-                )}
-
-                {/* Floating image 2 */}
-                {stop.img2 && (
-                  <img
-                    src={stop.img2}
-                    alt=""
-                    style={{
-                      position: "absolute",
-                      bottom: "20%",
-                      right: "10%",
-                      width: "clamp(180px, 22vw, 300px)",
-                      height: "auto",
-                      opacity: index === activeStop ? 0.85 : 0.2,
-                      transform:
-                        index === activeStop
-                          ? "translate(0, 0) scale(1) rotate(3deg)"
-                          : "translate(50px, -50px) scale(0.85) rotate(-8deg)",
-                      transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-                      animation:
-                        index === activeStop ? "float2 10s ease-in-out infinite" : "none",
-                      zIndex: 1,
-                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.15))",
-                    }}
-                  />
-                )}
-
-                {/* Text content */}
+              return (
                 <div
-                  className="about-story-text"
+                  key={index}
+                  data-index={index}
                   style={{
-                    position: "relative",
-                    zIndex: 10,
-                    maxWidth: "700px",
-                    textAlign: "center",
-                    transform: index === activeStop ? "scale(1)" : "scale(0.95)",
-                    opacity: index === activeStop ? 1 : 0.4,
-                    transition: "all 0.6s ease",
-                    fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    width: "100%",
+                    height: "650px",
+                    transformStyle: "preserve-3d",
+                    transformOrigin: "left center",
+                    transition: "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transform: isPast ? `rotateY(-160deg)` : `rotateY(0deg)`,
+                    opacity: isFuture && index > activeStop + 2 ? 0 : 1,
+                    zIndex: isPast ? 50 - index : isFuture ? 100 - index : 200,
+                    pointerEvents: isActive ? "auto" : "none",
                   }}
                 >
-                  <p
+                  {/* Page Front */}
+                  <div
                     style={{
-                      letterSpacing: "0.2em",
-                      textTransform: "uppercase",
-                      fontSize: "0.9rem",
-                      color: "#999",
-                      margin: "0 0 1rem",
-                      fontWeight: 500,
+                      position: "absolute",
+                      inset: 0,
+                      backfaceVisibility: "hidden",
+                      background:
+                        "linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(245,245,245,0.98) 100%)",
+                      borderRadius: "0 20px 20px 0",
+                      boxShadow: isActive
+                        ? "0 30px 80px rgba(225,29,46,0.25), 0 0 0 3px rgba(225,29,46,0.4)"
+                        : "0 15px 50px rgba(0,0,0,0.2)",
+                      borderLeft: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "60px 70px",
+                      overflow: "hidden",
                     }}
                   >
-                    {stop.year}
-                  </p>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1.2fr",
+                        gap: "70px",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
+                    >
+                      {/* Left Side - Text */}
+                      <div>
+                        {/* Big Chapter Number */}
+                        <div
+                          style={{
+                            fontSize: "7rem",
+                            fontWeight: "900",
+                            color: "rgba(225,29,46,0.08)",
+                            lineHeight: "0.9",
+                            fontFamily: "Georgia, serif",
+                            marginBottom: "15px",
+                          }}
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </div>
 
-                  {/* special layout for SECOND slide (values) */}
-                  {index === 1 ? (
-                    <p
+                        {/* Chapter Badge */}
+                        <div
+                          style={{
+                            display: "inline-block",
+                            padding: "8px 24px",
+                            background: PALETTE.red,
+                            borderRadius: "30px",
+                            marginBottom: "28px",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "0.65rem",
+                              color: "#fff",
+                              letterSpacing: "0.2em",
+                              textTransform: "uppercase",
+                              fontWeight: "700",
+                            }}
+                          >
+                            CHAPTER {index + 1}
+                          </span>
+                        </div>
+
+                        {/* Story Text */}
+                        {index === 1 ? (
+                          <div style={{ color: "#1a1a1a" }}>
+                            <p
+                              style={{
+                                fontSize: "1rem",
+                                lineHeight: "1.9",
+                                margin: "0 0 18px",
+                                fontFamily: "Georgia, serif",
+                              }}
+                            >
+                              These values:
+                            </p>
+                            <p
+                              style={{
+                                fontSize: "1.3rem",
+                                fontWeight: "700",
+                                color: PALETTE.red,
+                                margin: "0 0 18px",
+                                lineHeight: "1.5",
+                                fontFamily: "Georgia, serif",
+                              }}
+                            >
+                              Hardwork – Faith – Relentlessness
+                            </p>
+                            <p
+                              style={{
+                                fontSize: "1rem",
+                                lineHeight: "1.9",
+                                margin: 0,
+                                fontFamily: "Georgia, serif",
+                              }}
+                            >
+                              became the foundation of everything I pursued.
+                            </p>
+                          </div>
+                        ) : (
+                          <p
+                            style={{
+                              fontSize: "1rem",
+                              lineHeight: "1.9",
+                              color: "#1a1a1a",
+                              margin: 0,
+                              fontFamily: "Georgia, serif",
+                            }}
+                          >
+                            {stop.text}
+                          </p>
+                        )}
+
+                        {/* Page Number */}
+                        <div
+                          style={{
+                            marginTop: "35px",
+                            paddingTop: "18px",
+                            borderTop: "2px solid rgba(225,29,46,0.15)",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "0.8rem",
+                              color: PALETTE.red,
+                              fontFamily: "Georgia, serif",
+                              fontStyle: "italic",
+                            }}
+                          >
+                            Page {index + 1} of {journey.length}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Right Side - Images */}
+                      <div
+                        style={{
+                          position: "relative",
+                          minHeight: "450px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {stop.img && (
+                          <img
+                            src={stop.img}
+                            alt=""
+                            style={{
+                              position: "relative",
+                              maxWidth: "100%",
+                              width: "360px",
+                              height: "auto",
+                              borderRadius: "12px",
+                              boxShadow: "0 20px 60px rgba(0,0,0,0.25)",
+                              border: "10px solid #fff",
+                              zIndex: 3,
+                            }}
+                          />
+                        )}
+
+                        {stop.img2 && (
+                          <img
+                            src={stop.img2}
+                            alt=""
+                            style={{
+                              position: "absolute",
+                              bottom: "-25px",
+                              right: "-25px",
+                              maxWidth: "200px",
+                              width: "48%",
+                              height: "auto",
+                              borderRadius: "10px",
+                              boxShadow: "0 15px 40px rgba(0,0,0,0.2)",
+                              border: "8px solid #fff",
+                              zIndex: 2,
+                              transform: "rotate(8deg)",
+                            }}
+                          />
+                        )}
+
+                        {stop.img3 && (
+                          <img
+                            src={stop.img3}
+                            alt=""
+                            style={{
+                              position: "absolute",
+                              top: "-20px",
+                              left: "-20px",
+                              maxWidth: "150px",
+                              width: "36%",
+                              height: "auto",
+                              borderRadius: "8px",
+                              boxShadow: "0 12px 30px rgba(0,0,0,0.18)",
+                              border: "6px solid #fff",
+                              zIndex: 1,
+                              transform: "rotate(-10deg)",
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Page Curl */}
+                    <div
                       style={{
-                        color: "#333",
-                        lineHeight: "1.8",
-                        margin: 0,
-                        fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
-                        fontWeight: 300,
+                        position: "absolute",
+                        bottom: 0,
+                        right: 0,
+                        width: "90px",
+                        height: "90px",
+                        background:
+                          "linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.04) 50%)",
+                        borderBottomRightRadius: "20px",
+                        pointerEvents: "none",
                       }}
-                    >
-                      <span>These values:</span>
-                      <br />
-                      <span style={{ color: "#e11d2e", fontWeight: 700 }}>
-                        Hardwork – Faith – Relentlessness
-                      </span>
-                      <br />
-                      <span>became the foundation of everything I pursued.</span>
-                    </p>
-                  ) : (
-                    <p
+                    />
+
+                    {/* Book Spine Shadow */}
+                    <div
                       style={{
-                        color: "#333",
-                        lineHeight: "1.8",
-                        margin: 0,
-                        fontSize: "clamp(1.1rem, 2vw, 1.4rem)",
-                        fontWeight: 300,
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        width: "25px",
+                        background:
+                          "linear-gradient(to right, rgba(0,0,0,0.12), transparent)",
+                        pointerEvents: "none",
                       }}
-                    >
-                      {stop.text}
-                    </p>
-                  )}
+                    />
+                  </div>
+
+                  {/* Page Back (when flipped) */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                      background: "rgba(230,230,230,0.95)",
+                      borderRadius: "20px 0 0 20px",
+                      border: "1px solid rgba(200,200,200,0.4)",
+                      borderRight: "none",
+                      boxShadow: "inset 15px 0 20px rgba(0,0,0,0.08)",
+                    }}
+                  />
                 </div>
-              </article>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* Scroll Hint */}
+          {activeStop === 0 && (
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "-80vh",
+                position: "relative",
+                zIndex: 300,
+                animation: "bounce 2s infinite",
+              }}
+            >
+              <p
+                style={{
+                  color: PALETTE.inkDim,
+                  fontSize: "0.9rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Scroll to flip pages
+              </p>
+              <div style={{ fontSize: "2rem", marginTop: "10px" }}>↓</div>
+            </div>
+          )}
+
+          {/* Scroll Progress Indicator */}
+          <div
+            style={{
+              position: "fixed",
+              bottom: "40px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: "10px",
+              background: "rgba(11,11,13,0.9)",
+              padding: "12px 20px",
+              borderRadius: "30px",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              zIndex: 1000,
+            }}
+          >
+            {journey.map((_, idx) => (
+              <div
+                key={idx}
+                style={{
+                  width: activeStop === idx ? "30px" : "8px",
+                  height: "8px",
+                  borderRadius: "4px",
+                  background:
+                    activeStop === idx ? PALETTE.red : "rgba(255,255,255,0.3)",
+                  transition: "all 0.3s ease",
+                }}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
