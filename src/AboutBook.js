@@ -229,6 +229,7 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
           gap:40px;
           padding:50px;
           box-sizing:border-box;
+          align-items:flex-start;
         }
 
         .page-text{
@@ -268,7 +269,7 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
         .page-images{
           position:relative;
           display:flex;
-          align-items:center;
+          align-items:flex-start;
           justify-content:center;
           height:100%;
         }
