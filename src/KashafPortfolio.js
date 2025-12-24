@@ -140,7 +140,7 @@ export default function KashafPortfolio() {
   const [formStatus, setFormStatus] = useState('');
   const [typedIntro, setTypedIntro] = useState("");
   const [isTypingDone, setIsTypingDone] = useState(false);
-  //const [activeStop, setActiveStop] = useState(0);
+  const [activeStop, setActiveStop] = useState(0);
   //const [pageProgress, setPageProgress] = useState(0);
   const scrollRef = useRef(null);   // your main scroll container
   const aboutRef = useRef(null);    // the about section
@@ -234,6 +234,38 @@ export default function KashafPortfolio() {
   }, []);
 
   
+  useEffect(() => {
+  const scroller = scrollRef.current;
+  const section = aboutRef.current;
+  if (!scroller || !section) return;
+
+  const update = () => {
+    const viewportH = scroller.clientHeight;
+    const scrollTop = scroller.scrollTop;
+
+    const sectionTop = section.offsetTop;
+    const sectionH = section.scrollHeight;
+
+    // progress through the about section only
+    const start = sectionTop - viewportH * 0.1;
+    const end = sectionTop + sectionH - viewportH * 0.9;
+
+    const t = (scrollTop - start) / (end - start);
+    const clamped = Math.max(0, Math.min(1, t));
+
+    const idx = Math.round(clamped * (journey.length - 1));
+    setActiveStop(idx);
+  };
+
+  update();
+  scroller.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+
+  return () => {
+    scroller.removeEventListener("scroll", update);
+    window.removeEventListener("resize", update);
+  };
+}, []);
 
 /*
   useEffect(() => {
@@ -274,7 +306,7 @@ export default function KashafPortfolio() {
     };
   }, []);
   */
- 
+
   const skills = {
     "Programming": ["Python", "JavaScript", "Java", "TypeScript"],
     "Frontend": ["React", "React Native", "HTML/CSS", "Figma"],
@@ -433,10 +465,10 @@ export default function KashafPortfolio() {
 </section>
 
 
-          {/* About Section - Book Page Flip */} 
-           
-              <AboutBook journey={journey} PALETTE={PALETTE} />
-          
+      {/* About Section - Book Page Flip */} 
+        <AboutBook journey={journey} PALETTE={PALETTE} activeStop={activeStop} />
+
+
 
         {/* Projects Section */}
         <section
