@@ -13,7 +13,7 @@ const PALETTE = {
 
 const journey = [
   {
-    text: "Growing up in Islamabad, Pakistan, I watched my parents work tirelessly to provide for our family.\n \nMy father would leave before sunrise. My mother managed a household with precision that would rival any engineer.\n \nTheir dedication wasn't just about survival—it was about building something better. That lesson stuck with me.",
+    text: "Growing up in Islamabad, Pakistan, I watched my parents work tirelessly to provide for our family.\n \nMy father would leave before sunrise. My mother managed a household with precision that would rival any engineer.\n \nTheir dedication wasn't just about survival- it was about building something better. That lesson stuck with me.",
     img:  "/images/story/slide1-flag.png"
   },
   {
@@ -25,31 +25,31 @@ const journey = [
     img: "/images/story/slide3-plane.png",
   },
   {
-    text: "At 19, I boarded a plane with one suitcase, a scholarship to Bryn Mawr College, and a promise to myself:\n \nMake this count.\n \n7,000 miles from home. \nEverything familiar left behind.\n \nThe scariest part wasn't leaving—it was knowing I couldn't turn back.",
+    text: "At 19, I boarded a plane with one suitcase, a scholarship to Bryn Mawr College, and a promise to myself:\n \nMake this count.\n \n7,000 miles from home. \nEverything familiar left behind.\n \nThe scariest part wasn't leaving- it was knowing I couldn't turn back.",
     img: "/images/story/slide3-usa-pakistan.png"
   },
   {
-    text: "First semester. \nCS 101.\n \nThe assignment:\nPrint \"Hello World\"\n \nI stayed up until 3 AM debugging. \nMost people would've been frustrated.\n \nI was hooked.\n \nThere was something magical about making a computer do exactly what I wanted. \nLike learning a new language that could change the world.",
+    text: "First semester. \nCS 101.\n \nThe assignment:\nPrint \"Hello World\"\n \nI stayed up until 3 AM debugging. Most people would've been frustrated.\n \nI was hooked.\n \nThere was something magical about making a computer do exactly what I wanted. Like learning a new language that could change the world.",
     img: "/images/story/slide5-builder-cloud.png"
   },
   {
-    text: "I became obsessed.\n \nReact. \nPython. \nJavaScript. \nFirebase. \nNode.js.\n \nI devoured tutorials at 2x speed. \nBuilt projects that broke. \nFixed them. \nBroke them again.\n \nMy friends went to parties. \nI went to hackathons.\n \nThey thought I was crazy. \nI thought I was finally home.",
+    text: "I became obsessed.\n \nReact. \nPython. \nJavaScript. \nFirebase. \nNode.js.\n \nI devoured tutorials at 2x speed. \nBuilt projects that broke. \nFixed them. \nBroke them again.\n \nMy friends went to parties. I went to hackathons.\n \nThey thought I was crazy. I thought I was finally home.",
     img: "/images/story/slide6-helloworld.png"
   },
   {
-    text: "Then came the moment that changed everything.\n \nBuilding LocalLink—an app for rural artisans back home in Pakistan.\n \nWomen who could barely read. \nMarkets they couldn't reach. \nPotential locked away.\n \nThat's when it clicked: \nCode isn't just about syntax.\n \nIt's about solving real problems for real people.",
+    text: "Then came the moment that changed everything.\n \nBuilding LocalLink- an app for rural artisans back home in Pakistan.\n \nWomen who could barely read. Markets they couldn't reach. Potential locked away.\n \nThat's when it clicked: \nCode isn't just about syntax.It's about solving real problems for real people.",
     img: "/images/story/slide7-locallink.png"
   },
   {
-    text: "One project became ten.\nTen became twenty.\n \nInfraVision: \n3D infrastructure diagnostics.\n \nFresh Start: \nCampus resources for 5,000+ students.\n \nOpen source contributions. \nStartups. \nResearch.\n \nEach line of code taught me something new.\n \nBut more importantly—\neach project served someone real.",
+    text: "One project became ten.\nTen became twenty.\n InfraVision: 3D infrastructure diagnostics.\n Fresh Start: Campus resources for 5,000+ students.\n Open source contributions. \nStartups. \nResearch.\n \nEach line of code taught me something new.\n \nBut more importantly- each project served someone real.",
     img: "/images/story/slide8-builder.jpg"
   },
   {
-    text: "People ask me:\n\"Do you feel Pakistani or American?\"\n \nI feel like both. \nI feel like neither.\n \nI'm a bridge.\n \nBetween tradition and innovation. \nBetween Lahore and Pennsylvania. \nBetween my parents' dreams and my own reality.\n \nAnd I'm building more bridges with every project.",
+    text: "People ask me:\n\"Do you feel Pakistani or American?\"\n \nI feel like both. I feel like neither.\n \nI'm a bridge.\n \nBetween tradition and innovation. Between Islamabad and Pennsylvania. Between my parents' dreams and my own reality.\n \nAnd I'm building more bridges with every project.",
     img: "/images/story/slide9-connect.jpg"
   },
   {
-    text: "Today, I wake up in Pennsylvania but carry Pakistan in everything I build.\n \nI code in four languages.\nI dream in two.\n \nMy mission?\nBuild technology that speaks human.\n \nTechnology that remembers where it came from.\nTechnology that serves people who look like my mother,\nmy neighbors,\nmy community.\n \nThe journey continues.\nWant to build something meaningful together?",
+    text: "Today, I wake up in Pennsylvania but carry Pakistan in everything I build.\n \nI code in four languages.\nI dream in two.\n \nMy mission? Build technology that speaks human.\n \nTechnology that remembers where it came from.\nTechnology that serves people who look like my mother,my neighbors,my community.\n \nThe journey continues.Want to build something meaningful together?",
     img: "/images/story/slide10-globe.jpg"
   }
 ];
