@@ -149,8 +149,8 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
           <div className="about-flipbook" ref={bookRef}>
             {/* Cover */}
             <div className="hard">
-              <h3 style={{ margin: 0 }}>Kashaf Batool</h3>
-              <small>My Story</small>
+              <h3 style={{ margin: 0 }}>A life, told in moments</h3>
+              <small>Turn the pages</small>
             </div>
 
             {/* Pages */}
@@ -220,7 +220,28 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
         .about-flipbook .page{
           background:#fff;
           border:1px solid rgba(0,0,0,0.08);
+          position: relative;
         }
+
+        .about-flipbook .page::before{
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.08;
+        pointer-events: none;
+        z-index: 0;
+        }
+
+        .about-flipbook .page:nth-child(2)::before{ background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        .about-flipbook .page:nth-child(3)::before{ background: linear-gradient(135deg, #e0c3fc, #8ec5fc); }
+        .about-flipbook .page:nth-child(4)::before{ background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+        .about-flipbook .page:nth-child(5)::before{ background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+        .about-flipbook .page:nth-child(6)::before{ background: linear-gradient(135deg, #ffeaa7, #fdcb6e); }
+        .about-flipbook .page:nth-child(7)::before{ background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+        .about-flipbook .page:nth-child(8)::before{ background: linear-gradient(135deg, #f8b195, #f67280); }
+        .about-flipbook .page:nth-child(9)::before{ background: linear-gradient(135deg, #fa709a, #fee140); }
+        .about-flipbook .page:nth-child(10)::before{ background: linear-gradient(135deg, #30cfd0, #330867); }
+        .about-flipbook .page:nth-child(11)::before{ background: linear-gradient(135deg, #a8edea, #fed6e3); }
 
         .page-inner{
           height:100%;
@@ -230,6 +251,8 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
           padding:50px;
           box-sizing:border-box;
           align-items:flex-start;
+          position: relative;
+          z-index: 1;
         }
 
         .page-text{
@@ -249,6 +272,8 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
         .line{
           font-size:1.05rem;
           line-height:1.85;
+          white-space: pre-line;
+          margin-bottom: 0.5rem;
         }
 
         .strong{
@@ -279,7 +304,8 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
           height:auto;
           border-radius: 12px;
           box-shadow: 0 20px 60px rgba(0,0,0,0.22);
-          border: 10px solid #fff;
+          background: transparent;
+          border: none;
         }
 
         .img1{ width:360px; position:relative; z-index:3; }

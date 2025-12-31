@@ -13,29 +13,44 @@ const PALETTE = {
 
 const journey = [
   {
-    text: "I was born and raised in Pakistan where I learned the values that continue to shape who I am today",
-    img: "/images/story/slide1-house.png",
-    img2: "/images/story/slide1-flag.png"
+    text: "Growing up in Islamabad, Pakistan, I watched my parents work tirelessly to provide for our family.\n \nMy father would leave before sunrise. My mother managed a household with precision that would rival any engineer.\n \nTheir dedication wasn't just about survival—it was about building something better. That lesson stuck with me.",
+    img:  "/images/story/slide1-flag.png"
   },
   {
-    text: "These values: Hardwork - Faith - Relentlessness became the foundation of everything I pursued",
-    img: "/images/story/slide2-books.png",
-    img2: "/images/story/slide2-exclamation.png"
+    text: "These values:\n \nHardwork – Faith – Relentlessness\n \nweren't just words in our home—they were lived daily.\n \nWhen things got hard, we worked harder. \nWhen the path wasn't clear, we had faith. \nWhen doors closed, we found windows.",
+    img: "/images/story/slide2-exclamation.png"
   },
   {
-    text: "They are the reason I earned a full ride scholarship to Bryn Mawr College, and at the age of 19 I left home in the chase of biggeer dreams",
+    text: "At 16, I discovered something called a \"full-ride scholarship.\"\n \nIt felt impossible. \nA girl from Lahore going to America?\n \nBut my parents had shown me: \nimpossible is just a challenge waiting to be solved.\n \nSo I applied. \nAnd applied. \nAnd applied.",
     img: "/images/story/slide3-plane.png",
-    img2: "/images/story/slide3-suitcase.png",
-    img3: "/images/story/slide3-use-pakistan.png"
   },
   {
-    text: "During my first semester, I took my first cs class and I have genuinely fallen in love with the subject",
-    img: "/images/story/slide4-coffee.png",
-    img2: "/images/story/slide4-laptop-light.png" 
+    text: "At 19, I boarded a plane with one suitcase, a scholarship to Bryn Mawr College, and a promise to myself:\n \nMake this count.\n \n7,000 miles from home. \nEverything familiar left behind.\n \nThe scariest part wasn't leaving—it was knowing I couldn't turn back.",
+    img: "/images/story/slide3-usa-pakistan.png"
   },
   {
-    text: "Determined to learn as much as I could, I started learning different languages, frameworks and tools leading to different tech projects followed by open source contributions and start ups. You can learn more about this journey through scrolling through my work below",
+    text: "First semester. \nCS 101.\n \nThe assignment:\nPrint \"Hello World\"\n \nI stayed up until 3 AM debugging. \nMost people would've been frustrated.\n \nI was hooked.\n \nThere was something magical about making a computer do exactly what I wanted. \nLike learning a new language that could change the world.",
     img: "/images/story/slide5-builder-cloud.png"
+  },
+  {
+    text: "I became obsessed.\n \nReact. \nPython. \nJavaScript. \nFirebase. \nNode.js.\n \nI devoured tutorials at 2x speed. \nBuilt projects that broke. \nFixed them. \nBroke them again.\n \nMy friends went to parties. \nI went to hackathons.\n \nThey thought I was crazy. \nI thought I was finally home.",
+    img: "/images/story/slide6-helloworld.png"
+  },
+  {
+    text: "Then came the moment that changed everything.\n \nBuilding LocalLink—an app for rural artisans back home in Pakistan.\n \nWomen who could barely read. \nMarkets they couldn't reach. \nPotential locked away.\n \nThat's when it clicked: \nCode isn't just about syntax.\n \nIt's about solving real problems for real people.",
+    img: "/images/story/slide7-locallink.png"
+  },
+  {
+    text: "One project became ten.\nTen became twenty.\n \nInfraVision: \n3D infrastructure diagnostics.\n \nFresh Start: \nCampus resources for 5,000+ students.\n \nOpen source contributions. \nStartups. \nResearch.\n \nEach line of code taught me something new.\n \nBut more importantly—\neach project served someone real.",
+    img: "/images/story/slide8-builder.jpg"
+  },
+  {
+    text: "People ask me:\n\"Do you feel Pakistani or American?\"\n \nI feel like both. \nI feel like neither.\n \nI'm a bridge.\n \nBetween tradition and innovation. \nBetween Lahore and Pennsylvania. \nBetween my parents' dreams and my own reality.\n \nAnd I'm building more bridges with every project.",
+    img: "/images/story/slide9-connect.jpg"
+  },
+  {
+    text: "Today, I wake up in Pennsylvania but carry Pakistan in everything I build.\n \nI code in four languages.\nI dream in two.\n \nMy mission?\nBuild technology that speaks human.\n \nTechnology that remembers where it came from.\nTechnology that serves people who look like my mother,\nmy neighbors,\nmy community.\n \nThe journey continues.\nWant to build something meaningful together?",
+    img: "/images/story/slide10-globe.jpg"
   }
 ];
 
