@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import AboutBook from "./AboutBook";
 import BlogSection from './BlogSection';
+import ScrollStack, { ScrollStackItem } from "./ScrollStack";
+
 
 const PALETTE = {
   bg0: '#0b0b0d',
@@ -678,54 +680,66 @@ export default function KashafPortfolio() {
       </section>
 
           <BlogSection />
-          
+
         {/* Technical Skills Section */}
-        <section id="skills" style={{
-          minHeight: '100vh',
-          padding: '100px 20px',
-          background: 'rgba(16,17,20,0.25)',
-          backdropFilter: 'saturate(120%) blur(6px)'
-        }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2 style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              textAlign: 'center',
-              marginBottom: '4rem',
-              fontWeight: '800',
-              color: '#333'
-            }}>
-              Technical Skills
-            </h2>
-            
-            <div className="skills-container">
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '2rem'
-              }}>
-                {Object.entries(skills).map(([category, skillList]) => (
-                  <div key={category} style={{
-                    background: 'rgba(255,255,255,0.9)',
-                    borderRadius: '20px',
-                    padding: '2rem',
-                    textAlign: 'center',
-                    transform: 'rotate(1deg)',
-                    transition: 'all 0.3s ease'
-                  }}>
-                    <h4 style={{ marginBottom: '1.5rem', color: '#ff6b6b', fontSize: '1.3rem' }}>{category}</h4>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-                      {skillList.map((skill) => (
-                        <span key={skill} className="skill-tag">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+<section
+  id="skills"
+  style={{
+    minHeight: "100vh",
+    padding: "100px 20px",
+    background: "rgba(16,17,20,0.25)",
+    backdropFilter: "saturate(120%) blur(6px)",
+  }}
+>
+  <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+    <h2
+      style={{
+        fontSize: "clamp(2.5rem, 6vw, 4rem)",
+        textAlign: "center",
+        marginBottom: "4rem",
+        fontWeight: "800",
+        color: "#eaeaea",
+      }}
+    >
+      Technical Skills
+    </h2>
+
+    <ScrollStack
+      className="skills-scrollstack"
+      useWindowScroll={false}
+      itemDistance={120}
+      itemStackDistance={26}
+      itemScale={0.035}
+      stackPosition="30%"
+      scaleEndPosition="10%"
+      baseScale={0.86}
+      rotationAmount={1.2}
+      blurAmount={0.6}
+    >
+      {Object.entries(skills).map(([category, skillList], idx) => (
+        <ScrollStackItem key={category} itemClassName="skills-stack-card">
+          <div className="skills-card-inner">
+            <div className="skills-card-header">
+              <span className="skills-card-index">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <h4 className="skills-card-title">{category}</h4>
+            </div>
+
+            <div className="skills-tag-wrap">
+              {skillList.map((skill) => (
+                <span key={skill} className="skill-tag">
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
-        </section>
+        </ScrollStackItem>
+      ))}
+    </ScrollStack>
+  </div>
+</section>
+
 
         {/* Contact Section */}
         <section id="contact" style={{

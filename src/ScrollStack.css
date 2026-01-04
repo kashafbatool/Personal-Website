@@ -1,0 +1,74 @@
+/* scope this only to skills */
+.skills-scrollstack {
+  height: 80vh;              /* visible stack area */
+  max-width: 820px;
+  margin: 0 auto;
+  overflow: visible;         /* allow cards to show while stacking */
+}
+
+.skills-stack-card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.skills-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skills-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.skills-card-index {
+  font-weight: 900;
+  font-size: 3rem;
+  color: rgba(225,29,46,0.12);
+  line-height: 1;
+}
+
+.skills-card-title {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #e11d2e;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.skills-tag-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+/* you already have .skill-tag — keep it.
+   if you want it to match better: */
+.skill-tag {
+  background: rgba(225,29,46,0.1);
+  border: 1px solid rgba(225,29,46,0.35);
+  color: #b70f1e;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .skills-scrollstack {
+    height: 75vh;
+  }
+  .skills-stack-card {
+    padding: 22px;
+  }
+  .skills-card-index {
+    font-size: 2.4rem;
+  }
+}
