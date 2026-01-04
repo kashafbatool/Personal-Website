@@ -154,40 +154,104 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
             </div>
 
             {/* Pages */}
-            {journey.map((stop, index) => (
-              <div className="page" key={stop.year}>
-                <div className="page-inner">
-                  <div className="page-text">
-                    <div className="page-year">{stop.year}</div>
+                {journey.map((stop, index) => {
+              const isFlipped = index % 2 === 1;
+              const layout = stop.layout || (isFlipped ? "flip" : "default");
+              const textAlign = stop.textAlign || (layout === "flip" ? "right" : "left");
+              const contentAlign = stop.contentAlign || "center";
+              const imageLayout = stop.imageLayout || "stacked";
 
-                    {/* special 2nd slide formatting */}
-                    {index === 1 ? (
-                      <>
-                        <div className="line">These values:</div>
-                        <div className="line strong" style={{ color: PALETTE.red }}>
-                          Hardwork – Faith – Relentlessness
-                        </div>
-                        <div className="line">
-                          became the foundation of everything I pursued.
-                        </div>
-                      </>
-                    ) : (
-                      <div className="line">{stop.text}</div>
-                    )}
+              return (
+                <div className="page" key={stop.title || index}>
+                  <div
+                    className={`page-inner ${layout}`}
+                    style={{
+                      background: stop.background || "#fff",
+                      alignItems: contentAlign,
+                    }}
+                  >
+                    <div
+                      className={`page-text align-${textAlign}`}
+                      style={{ color: stop.textColor || "#111" }}
+                    >
+                      <div
+                        className="page-year"
+                        style={{ color: stop.accent || PALETTE.red }}
+                      >
+                        {stop.title || stop.year}
+                      </div>
 
-                    <div className="page-number">
-                      Page {index + 1} of {journey.length}
+                      {index === 1 ? (
+                        <>
+                          <div className="line">These values:</div>
+                          <div className="line strong" style={{ color: PALETTE.red }}>
+                            Hardwork – Faith – Relentlessness
+                          </div>
+                          <div className="line">
+                            became the foundation of everything I pursued.
+                          </div>
+                        </>
+                      ) : stop.lines?.length ? (
+                        <div className="line-stack">
+                          {stop.lines.map((line, i) => (
+                            <div className="line" key={i}>
+                              {line}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="line">{stop.text}</div>
+                      )}
+
+                      <div
+                        className="page-number"
+                        style={{
+                          borderTopColor: `${stop.accent || PALETTE.red}25`,
+                          color: stop.accent || PALETTE.red,
+                        }}
+                      >
+                        Page {index + 1} of {journey.length}
+                      </div>
+                      
                     </div>
-                  </div>
-
-                  <div className="page-images">
-                    {stop.img && <img src={stop.img} alt="" className="img1" />}
-                    {stop.img2 && <img src={stop.img2} alt="" className="img2" />}
-                    {stop.img3 && <img src={stop.img3} alt="" className="img3" />}
+                  
+                        <div
+                      className={`page-images ${imageLayout}`}
+                      style={{
+                        justifyContent: stop.imageJustify || "center",
+                        alignItems: stop.imageAlign || "flex-start",
+                      }}
+                    >
+                      {stop.img && (
+                        <img
+                          src={stop.img}
+                          alt=""
+                          className="img1"
+                          style={stop.imgStyle}
+                        />
+                      )}
+                      {stop.img2 && (
+                        <img
+                          src={stop.img2}
+                          alt=""
+                          className="img2"
+                          style={stop.img2Style}
+                        />
+                      )}
+                      {stop.img3 && (
+                        <img
+                          src={stop.img3}
+                          alt=""
+                          className="img3"
+                          style={stop.img3Style}
+                        />
+                      )}
+                    </div>
+                 
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {/* Back cover */}
             <div className="hard" />
@@ -246,48 +310,59 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
         .page-inner{
           height:100%;
           display:grid;
-          grid-template-columns: 1fr 1.2fr;
-          gap:40px;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap:32px;
           padding:50px;
           box-sizing:border-box;
-          align-items:flex-start;
-          position: relative;
-          z-index: 1;
+          align-items:center;
+          border-radius:22px;
+          box-shadow: 0 30px 90px rgba(0,0,0,0.14);
+          border:1px solid rgba(0,0,0,0.06);
+        }
+        .page-inner.flip{ 
+          grid-template-columns: 0.95fr 1.05fr;
         }
 
+        .page-inner.tall{ align-items:flex-start; }
+        .page-inner.low{ align-items:flex-end; }
+
+        .page-inner.flip .page-text{ order:2; }
+        .page-inner.flip .page-images{ order:1; }
         .page-text{
           color:#111;
           font-family: Georgia, "Times New Roman", serif;
+          display:flex;
+          flex-direction:column;
+          gap:12px;
+          max-width:520px;
         }
+        .page-text.align-left{ text-align:left; align-items:flex-start; }
+        .page-text.align-right{ text-align:right; align-items:flex-end; }
+        .page-text.align-center{ text-align:center; align-items:center; }
+
+        .line-stack{ display:flex; flex-direction:column; gap:10px; }
 
         .page-year{
           letter-spacing:0.18em;
           text-transform:uppercase;
           font-size:0.85rem;
           color: rgba(0,0,0,0.55);
-          margin-bottom:14px;
+          margin-bottom:4px;
           font-weight:700;
         }
 
         .line{
           font-size:1.05rem;
-          line-height:1.85;
-          white-space: pre-line;
-          margin-bottom: 0.5rem;
+          line-height:1.7;
         }
 
-        .strong{
-          font-weight:800;
-          font-size:1.25rem;
-          margin: 10px 0;
-        }
+        .line.strong{ font-weight:800; letter-spacing:0.01em; }
 
         .page-number{
-          margin-top:22px;
+          margin-top:12px;
           padding-top:12px;
           border-top:2px solid rgba(225,29,46,0.15);
-          font-size:0.85rem;
-          color:${PALETTE.red};
+          font-size:0.9rem;
           font-style:italic;
         }
 
@@ -297,20 +372,24 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
           align-items:flex-start;
           justify-content:center;
           height:100%;
+          gap:16px;
+          padding:6px;
         }
-
+        .page-images.stacked{ flex-direction:column; align-items:center; }
+        .page-images.split{ justify-content:space-between; }
+        .page-images.floated{ align-items:flex-end; }
         .page-images img{
           max-width: 100%;
           height:auto;
-          border-radius: 12px;
+          border-radius: 16px;
           box-shadow: 0 20px 60px rgba(0,0,0,0.22);
           background: transparent;
           border: none;
         }
 
-        .img1{ width:360px; position:relative; z-index:3; }
-        .img2{ width:200px; position:absolute; right:-18px; bottom:-18px; transform:rotate(8deg); z-index:2; border-width:8px; }
-        .img3{ width:150px; position:absolute; left:-18px; top:-18px; transform:rotate(-10deg); z-index:1; border-width:6px; }
+        .img1{ width:340px; position:relative; z-index:3; }
+        .img2{ width:200px; position:absolute; right:-22px; bottom:-10px; transform:rotate(6deg); z-index:2; border-width:8px; }
+        .img3{ width:160px; position:absolute; left:-18px; top:-18px; transform:rotate(-8deg); z-index:1; border-width:6px; }
 
         @media (max-width: 1150px){
           .page-inner{ grid-template-columns: 1fr; }
