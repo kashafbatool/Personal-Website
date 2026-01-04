@@ -47,7 +47,8 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
       });
 
         $book.data("isTurnInit", true);
-      const onResize = () => {
+      
+        const onResize = () => {
         // Optional: keep size responsive-ish
         const w = Math.min(1100, window.innerWidth - 40);
         const h = Math.min(650, window.innerHeight - 220);
@@ -160,14 +161,22 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
               const textAlign = stop.textAlign || (layout === "flip" ? "right" : "left");
               const contentAlign = stop.contentAlign || "center";
               const imageLayout = stop.imageLayout || "stacked";
+              const textureLayer = "url('/images/story/page-texture.jpg')";
+              const backgroundImage = textureLayer;
+              const backgroundBlend = "normal";
 
               return (
                 <div className="page" key={stop.title || index}>
                   <div
                     className={`page-inner ${layout}`}
                     style={{
-                      background: stop.background || "#fff",
+                      backgroundImage,
+                      backgroundBlendMode: backgroundBlend,
+                      backgroundColor: "rgba(255,255,255,0.94)",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
                       alignItems: contentAlign,
+                    
                     }}
                   >
                     <div
@@ -354,9 +363,13 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
         .line{
           font-size:1.05rem;
           line-height:1.7;
+          word-spacing:0.02em;
         }
 
-        .line.strong{ font-weight:800; letter-spacing:0.01em; }
+        .line + .line { margin-top:4px; }
+
+        
+        .line.strong{ font-weight:800; letter-spacing:0.02em; }
 
         .page-number{
           margin-top:12px;
