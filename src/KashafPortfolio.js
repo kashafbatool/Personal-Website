@@ -276,6 +276,7 @@ export default function KashafPortfolio() {
   const aboutRef = useRef(null);    // the about section
   //const stopRefs = useRef([]);
   const basePath = process.env.PUBLIC_URL || '';
+  const [scrollContainer, setScrollContainer] = useState(null);
 
   // highlight each card as you scroll & move plane
 /*
@@ -363,7 +364,11 @@ export default function KashafPortfolio() {
     return () => clearInterval(interval);
   }, []);
 
-  
+  useEffect(() => {
+    setScrollContainer(scrollRef.current);
+  }, []);
+
+
   useEffect(() => {
   const scroller = scrollRef.current;
   const section = aboutRef.current;
@@ -682,64 +687,30 @@ export default function KashafPortfolio() {
           <BlogSection />
 
         {/* Technical Skills Section */}
-<section
-  id="skills"
-  style={{
-    minHeight: "100vh",
-    padding: "100px 20px",
-    background: "rgba(16,17,20,0.25)",
-    backdropFilter: "saturate(120%) blur(6px)",
-  }}
->
-  <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-    <h2
-      style={{
-        fontSize: "clamp(2.5rem, 6vw, 4rem)",
-        textAlign: "center",
-        marginBottom: "4rem",
-        fontWeight: "800",
-        color: "#eaeaea",
-      }}
-    >
-      Technical Skills
-    </h2>
+<section id="skills" style={{ minHeight: "200vh", padding: "100px 20px" }}>
+  <h2 style={{ textAlign: "center", color: "white", marginBottom: "50px", fontSize: "3rem" }}>
+    Technical Skills
+  </h2>
 
-    <ScrollStack
-      className="skills-scrollstack"
-      useWindowScroll={false}
-      itemDistance={120}
-      itemStackDistance={26}
-      itemScale={0.035}
-      stackPosition="30%"
-      scaleEndPosition="10%"
-      baseScale={0.86}
-      rotationAmount={1.2}
-      blurAmount={0.6}
-    >
-      {Object.entries(skills).map(([category, skillList], idx) => (
-        <ScrollStackItem key={category} itemClassName="skills-stack-card">
-          <div className="skills-card-inner">
-            <div className="skills-card-header">
-              <span className="skills-card-index">
-                {String(idx + 1).padStart(2, "0")}
-              </span>
-              <h4 className="skills-card-title">{category}</h4>
-            </div>
-
-            <div className="skills-tag-wrap">
-              {skillList.map((skill) => (
-                <span key={skill} className="skill-tag">
-                  {skill}
-                </span>
-              ))}
-            </div>
+  <ScrollStack stackPosition={150}> 
+    {/* Just map your cards normally */}
+    {Object.entries(skills).map(([category, skillList], idx) => (
+      <ScrollStackItem key={category}>
+        <div className="skills-card-inner">
+          <div className="skills-card-header">
+            <span className="skills-card-index">{String(idx + 1).padStart(2, "0")}</span>
+            <h4 className="skills-card-title">{category}</h4>
           </div>
-        </ScrollStackItem>
-      ))}
-    </ScrollStack>
-  </div>
+          <div className="skills-tag-wrap">
+            {skillList.map(skill => (
+              <span key={skill} className="skill-tag">{skill}</span>
+            ))}
+          </div>
+        </div>
+      </ScrollStackItem>
+    ))}
+  </ScrollStack>
 </section>
-
 
         {/* Contact Section */}
         <section id="contact" style={{

@@ -1,74 +1,70 @@
-/* scope this only to skills */
-.skills-scrollstack {
-  height: 80vh;              /* visible stack area */
-  max-width: 820px;
+.scroll-stack-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
-  overflow: visible;         /* allow cards to show while stacking */
+  /* Ensure plenty of space at bottom to finish scrolling */
+  padding-bottom: 20vh;
 }
 
-.skills-stack-card {
-  background: rgba(255,255,255,0.92);
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
-  border: 1px solid rgba(0,0,0,0.08);
-}
-
-.skills-card-inner {
+.scroll-stack-card-wrapper {
+  /* This height controls how "long" you have to scroll to get to the next card. 
+     Higher = slower animation. */
+  height: 80vh; 
   display: flex;
-  flex-direction: column;
-  gap: 18px;
+  align-items: flex-start; /* Align card to top of sticky area */
+  justify-content: center;
+  box-sizing: border-box;
 }
 
+/* Your existing card styles, slightly tweaked */
+.scroll-stack-card {
+  width: 100%;
+  /* Important: The card itself handles the look, the wrapper handles the position */
+  background: #151515; /* Dark background from video */
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  
+  /* Smooth out the JS animation */
+  transition: transform 0.1s linear, opacity 0.1s linear;
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* Ensure content inside looks good */
 .skills-card-header {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  gap: 14px;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .skills-card-index {
-  font-weight: 900;
-  font-size: 3rem;
-  color: rgba(225,29,46,0.12);
+  font-size: 4rem;
+  font-weight: 800;
+  color: #333;
   line-height: 1;
 }
 
 .skills-card-title {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
   margin: 0;
-  font-size: 1.35rem;
-  color: #e11d2e;
-  font-weight: 800;
-  letter-spacing: -0.02em;
 }
 
 .skills-tag-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
+  gap: 12px;
 }
 
-/* you already have .skill-tag — keep it.
-   if you want it to match better: */
 .skill-tag {
-  background: rgba(225,29,46,0.1);
-  border: 1px solid rgba(225,29,46,0.35);
-  color: #b70f1e;
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-@media (max-width: 640px) {
-  .skills-scrollstack {
-    height: 75vh;
-  }
-  .skills-stack-card {
-    padding: 22px;
-  }
-  .skills-card-index {
-    font-size: 2.4rem;
-  }
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 1rem;
 }
