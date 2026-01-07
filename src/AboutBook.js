@@ -151,7 +151,7 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
             {/* Cover */}
             <div className="hard">
               <h3 style={{ margin: 0 }}>A life, told in moments</h3>
-              <small>Turn the pages</small>
+              <small>Turn the pages from the bottom corners</small>
             </div>
 
             {/* Pages */}

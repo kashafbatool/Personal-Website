@@ -696,7 +696,7 @@ export default function KashafPortfolio() {
         {/* Technical Skills Section */}
 <section id="skills" style={{ minHeight: "200vh", padding: "100px 20px" }}>
   <h2 style={{ textAlign: "center", color: "white", marginBottom: "50px", fontSize: "3rem" }}>
-    Technical Skills
+    Tech Stack
   </h2>
 
   <ScrollStack stackPosition={150}> 
@@ -1453,9 +1453,8 @@ export default function KashafPortfolio() {
     font-family: inherit !important;
   }
 
-`}</style>
-    </div>
+`}</style>   {/* <--- This closes the style tag */}
+    </div>         
+  </div>
   );
 }
-
-
