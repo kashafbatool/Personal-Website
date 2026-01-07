@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import AboutBook from "./AboutBook";
 import BlogSection from './BlogSection';
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
+import Contact from './Contact'; // Adjust path if you put it in a subfolder like /components
 
 
 const PALETTE = {
@@ -484,6 +485,12 @@ export default function KashafPortfolio() {
       muted
       loop
       playsInline
+      preload="auto"
+      controls={false}
+      disablePictureInPicture
+      controlsList="nodownload nofullscreen noplaybackrate"
+      aria-hidden="true"
+      tabIndex={-1}
     >
       <source src="/videos/bg.mp4" type="video/mp4" />
     </video>
@@ -713,82 +720,7 @@ export default function KashafPortfolio() {
 </section>
 
         {/* Contact Section */}
-        <section id="contact" style={{
-          minHeight: '100vh',
-          padding: '100px 20px',
-          background: 'rgba(255,255,255,0.03)',
-          backdropFilter: 'blur(10px)'
-        }}>
-          <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-            <h2 style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              textAlign: 'center',
-              marginBottom: '4rem',
-              fontWeight: '800'
-            }}>
-              Let's Build Something Amazing
-            </h2>
-            
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-              gap: '3rem'
-            }}>
-              {/* Contact Info */}
-              <div className="contact-info">
-                <h3>Ready to make an impact?</h3>
-                <p>Whether you're looking for someone who can code, design, research, or lead—I'm passionate about creating technology that serves real people.</p>
-                
-                <div className="contact-links">
-                  <a href="mailto:kbatool@brynmawr.edu" className="contact-link">
-                    <span>📧</span> kbatool@brynmawr.edu
-                  </a>
-                  <a href="tel:+16103481965" className="contact-link">
-                    <span>📱</span> (610) 348-1965
-                  </a>
-                  <a href="https://linkedin.com/in/kashafbatool1" className="contact-link">
-                    <span>💼</span> LinkedIn
-                  </a>
-                  <a href="https://github.com/kashafbatool" className="contact-link">
-                    <span>💻</span> GitHub
-                  </a>
-                </div>
-              </div>
-              
-              {/* Contact Form */}
-              <div className="contact-form-container">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="form-input"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="form-input"
-                />
-                <textarea
-                  name="message"
-                  rows={4}
-                  placeholder="Tell me about your project!"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className="form-input"
-                />
-                <button onClick={handleSubmit} className="submit-btn">
-                  {formStatus || 'Send Message ✨'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+        <Contact />
 
      <style jsx>{`
         .main-scroll {
