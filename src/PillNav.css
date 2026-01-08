@@ -1,0 +1,102 @@
+.pill-nav {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pill-nav__toggle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pill-nav-bg);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pill-nav__toggle:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.35),
+    0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.pill-nav__toggle-icon {
+  font-size: 1.4rem;
+  color: var(--pill-nav-text);
+}
+
+.pill-nav__logo-image {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pill-nav__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pill-nav-bg);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pill-nav__panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.pill-nav__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--pill-nav-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.pill-nav__item:hover,
+.pill-nav__item:focus-visible {
+  background: var(--pill-nav-base);
+  color: var(--pill-nav-text-hover);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .pill-nav {
+    top: 16px;
+    right: 16px;
+  }
+
+  .pill-nav__panel {
+    padding: 10px 12px;
+  }
+}

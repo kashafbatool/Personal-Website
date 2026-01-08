@@ -3,6 +3,7 @@ import AboutBook from "./AboutBook";
 import BlogSection from './BlogSection';
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 import Contact from './Contact'; // Adjust path if you put it in a subfolder like /components
+import PillNav from './PillNav'; // Import the component
 
 
 const PALETTE = {
@@ -278,6 +279,14 @@ export default function KashafPortfolio() {
   //const stopRefs = useRef([]);
   const basePath = process.env.PUBLIC_URL || '';
   const [scrollContainer, setScrollContainer] = useState(null);
+  const navItems = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Blog', href: '#blog' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Contact', href: '#contact' }
+  ];
 
   // highlight each card as you scroll & move plane
 /*
@@ -514,6 +523,15 @@ export default function KashafPortfolio() {
         className="main-scroll"
         style={{ height: "100vh", overflowY: "auto", position: "relative", zIndex: 2 }}
       >
+        <PillNav
+          items={navItems}
+          logo="/images/hero-photo.JPG"
+          logoAlt="KB"
+          baseColor="#ffffff"
+          pillColor="rgba(20, 20, 22, 0.6)"
+          pillTextColor="#ffffff"
+          hoveredPillTextColor="#000000"
+        />
 
 
         {/* Hero Section */}
