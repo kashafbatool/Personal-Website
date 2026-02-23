@@ -184,6 +184,38 @@ export default function LocalLinkProject() {
           >
             ← Back Home
           </button>
+          <a
+            href="https://github.com/kashafbatool/Local-Link"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              marginTop: "16px",
+              padding: "15px 40px",
+              background: "transparent",
+              border: "2px solid #a3d85e",
+              color: "#a3d85e",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: "pointer",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              transition: "all 0.3s ease",
+              textDecoration: "none",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#a3d85e";
+              e.currentTarget.style.color = THEME.bg;
+              e.currentTarget.style.boxShadow = "0 0 30px #a3d85e";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = "#a3d85e";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            GitHub ↗
+          </a>
         </div>
 
         {/* Scroll indicator */}

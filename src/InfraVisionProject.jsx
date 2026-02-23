@@ -139,6 +139,38 @@ export default function InfraVisionProject() {
           >
             ← Back Home
           </button>
+          <a
+            href="https://github.com/kashafbatool/infravision"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              marginTop: '16px',
+              padding: '15px 40px',
+              background: 'transparent',
+              border: '2px solid #ff00ff',
+              color: '#ff00ff',
+              fontSize: '16px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              transition: 'all 0.3s ease',
+              textDecoration: 'none',
+              display: 'inline-block',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#ff00ff';
+              e.currentTarget.style.color = '#000';
+              e.currentTarget.style.boxShadow = '0 0 30px #ff00ff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = '#ff00ff';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            GitHub ↗
+          </a>
         </div>
 
         {/* Scroll indicator */}

@@ -178,6 +178,38 @@ export default function Room8Project() {
           >
             ← Back Home
           </button>
+          <a
+            href="https://github.com/kashafbatool/Room8"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              marginTop: "16px",
+              padding: "15px 40px",
+              background: "transparent",
+              border: `2px solid ${THEME.warm}`,
+              color: THEME.warm,
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: "pointer",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              transition: "all 0.3s ease",
+              textDecoration: "none",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = THEME.warm;
+              e.currentTarget.style.color = THEME.bg;
+              e.currentTarget.style.boxShadow = `0 0 30px ${THEME.warm}`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = THEME.warm;
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            GitHub ↗
+          </a>
         </div>
 
         <div

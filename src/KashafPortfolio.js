@@ -263,19 +263,12 @@ const getProject = (title) => projects.find((p) => p.title === title);
 
 const projectBuckets = [
   {
-    id: "ai",
-    label: "AI & Intelligent Systems",
-    items: [
-      { name: "Model-backed tools (coming soon)" }
-    ]
-  },
-  {
     id: "fullstack",
     label: "Full-Stack Product Engineering",
     items: [
+      { ...getProject("Room8"), slug: "room8" },
       { ...getProject("Local Link"), slug: "local-link" },
       { ...getProject("InfraVision"), slug: "infra-vision" },
-      { ...getProject("Room8"), slug: "room8" },
     ]
   },
   {
