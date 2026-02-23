@@ -1,10 +1,38 @@
 import { useState } from 'react';
-import { useForm } from '@formspree/react';
 import './Contact.css';
 
 const Contact = () => {
-  const [state, handleFormspreeSubmit] = useForm("mwvnwvkgY");
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formStatus, setFormStatus] = useState('');
   const [copied, setCopied] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus('Sending...');
+    try {
+      const res = await fetch('https://formspree.io/f/mwvnwvkg', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setFormStatus('Message Sent!');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setFormStatus(''), 3000);
+      } else {
+        setFormStatus(data?.error || 'Something went wrong. Try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      setFormStatus('Something went wrong. Try again.');
+    }
+  };
 
   const copyEmail = () => {
     navigator.clipboard.writeText('kbatool@brynmawr.edu');
@@ -12,15 +40,8 @@ const Contact = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const getButtonLabel = () => {
-    if (state.submitting) return 'Sending...';
-    if (state.succeeded) return 'Message Sent! 🚀';
-    return 'Send Message';
-  };
-
   return (
     <section id="contact" className="contact-section">
-      {/* Background Ambience */}
       <div className="ambient-glow" />
 
       <div className="contact-container">
@@ -77,7 +98,7 @@ const Contact = () => {
 
         {/* RIGHT SIDE: Form */}
         <div className="form-card">
-          <form onSubmit={handleFormspreeSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label className="form-label">YOUR NAME</label>
               <input
@@ -85,6 +106,8 @@ const Contact = () => {
                 name="name"
                 className="styled-input"
                 placeholder="What should I call you?"
+                value={formData.name}
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -96,6 +119,8 @@ const Contact = () => {
                 name="email"
                 className="styled-input"
                 placeholder="Where can I reach you?"
+                value={formData.email}
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -106,20 +131,14 @@ const Contact = () => {
                 name="message"
                 className="styled-textarea"
                 placeholder="Tell me about your idea..."
+                value={formData.message}
+                onChange={handleInputChange}
                 required
               />
             </div>
 
-            {state.errors && state.errors.length > 0 && (
-              <div style={{ color: '#ff6b6b', fontSize: '14px', marginBottom: '12px' }}>
-                {state.errors.map((err, i) => (
-                  <div key={i}>{err.message}</div>
-                ))}
-              </div>
-            )}
-
-            <button type="submit" className="submit-btn-fancy" disabled={state.submitting}>
-              {getButtonLabel()}
+            <button type="submit" className="submit-btn-fancy" disabled={formStatus === 'Sending...'}>
+              {formStatus || 'Send Message'}
             </button>
           </form>
         </div>
