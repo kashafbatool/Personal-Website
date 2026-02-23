@@ -356,8 +356,7 @@ export default function HeraProject() {
                 controls
                 style={{ width: "100%", display: "block", background: "#000" }}
               >
-                <source src={`${basePath}/videos/hera-demo.mov`} type="video/mp4" />
-                <source src={`${basePath}/videos/hera-demo.mov`} type="video/quicktime" />
+                <source src={`${basePath}/videos/hera-demo.mp4`} type="video/mp4" />
               </video>
             </div>
             <div
