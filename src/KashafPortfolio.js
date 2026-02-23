@@ -472,7 +472,7 @@ export default function KashafPortfolio() {
       color: '#fff',
       overflow: 'hidden',
       position: 'relative',
-      //background: PALETTE.bg0
+      background: 'radial-gradient(ellipse at 20% 50%, #1a0a0a 0%, #0b0b0d 60%, #050507 100%)',
     }}>
       {/* Background video */}
     <video
@@ -534,18 +534,9 @@ export default function KashafPortfolio() {
             zIndex: 2
           }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              alignItems: "center",
-              gap: "60px",
-              maxWidth: "1400px",
-              width: "100%"
-            }}
-          >
+          <div className="hero-grid">
             {/* LEFT SIDE — TEXT */}
-            <div style={{ textAlign: "left" }}>
+            <div className="hero-text">
               <p
                 style={{
                   color: "#c4c4c4",
@@ -1373,6 +1364,43 @@ export default function KashafPortfolio() {
     height: 100%;
     object-fit: cover;
     z-index: 0;
+  }
+
+  /* Hero grid */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    max-width: 1400px;
+    width: 100%;
+  }
+  .hero-text {
+    text-align: left;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      text-align: center;
+      padding: 40px 0;
+    }
+    .hero-text {
+      text-align: center;
+      order: 2;
+    }
+    .hero-grid > div:last-child {
+      order: 1;
+    }
+    .hero-grid img {
+      max-width: 240px !important;
+    }
+    .cta-primary, .cta-secondary {
+      width: 100%;
+      justify-content: center;
+    }
   }
   .nav-btn {
     background: transparent;
