@@ -71,12 +71,13 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
 
       const onResize = () => {
         const w = Math.min(1100, window.innerWidth - 40);
-        const h = Math.min(650, window.innerHeight - 220);
+        const h = Math.round(w * (650 / 1100));
         $book.turn("size", w, h);
         $book.turn("center");
-        window.addEventListener("resize", onResize);
-        onResize();
       };
+
+      window.addEventListener("resize", onResize);
+      onResize();
 
       return onResize;
     };
@@ -574,7 +575,15 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
 
         @media (max-width: 1150px) {
           .page-inner { grid-template-columns: 1fr; }
-          .about-flipbook { width: min(1100px, calc(100vw - 40px)); }
+          .about-flipbook { width: min(1100px, calc(100vw - 40px)); height: auto; }
+        }
+        @media (max-width: 768px) {
+          .img1 { width: min(220px, 60vw); }
+          .img2 { width: min(150px, 40vw); }
+          .img3 { width: min(120px, 35vw); }
+          .page-inner { padding: 1rem; }
+          .line { font-size: 0.85rem; }
+          .cover-name { font-size: 1.5rem; }
         }
       `}</style>
     </section>

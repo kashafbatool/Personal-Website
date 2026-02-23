@@ -508,7 +508,7 @@ export default function KashafPortfolio() {
       <div
         ref={scrollRef}
         className="main-scroll"
-        style={{ height: "100vh", overflowY: "auto", position: "relative", zIndex: 2 }}
+        style={{ height: "100vh", overflowY: "auto", overflowX: "hidden", position: "relative", zIndex: 2 }}
       >
         <PillNav
           items={navItems}
