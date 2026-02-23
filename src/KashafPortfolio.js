@@ -194,20 +194,36 @@ const projects = [
     video: "/videos/locallink.mp4"
   },
   {
-    title: "Fresh Start",
-    tech: "React, JavaScript, Figma, UI/UX Research",
-    description: "Chatbot web app centralizing campus resources for 5,000+ Tri-College students with special international student features.",
-    highlights: ["User research with 5,000+ students", "NLP-based queries", "International student focus"],
-    color: PALETTE.red,
-    video: "/videos/freshstart.mp4"
-  },
-  {
     title: "Alvi Auctioneers Redesign",
     tech: "Frontend Development, UX/UI Design",
     description: "Redesigned auction website improving mobile usability from 65% to 85% and increasing time-on-site from 1.3 to 2.1 minutes.",
     highlights: ["20% mobile usability improvement", "Navigation optimization", "User engagement boost"],
     color: PALETTE.red,
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center"
+  },
+  {
+    title: "Room8",
+    tech: "Swift, SwiftUI, MVVM, Google Calendar API, UserNotifications, iOS",
+    description: "iOS roommate management app built at a hackathon — handles split expenses, chore scheduling, a shared calendar, and a collaborative fridge board for sticky notes and photos.",
+    highlights: [
+      "Built with a team of 3 at a hackathon",
+      "Bill splitting with per-person breakdown",
+      "MVVM architecture with priority-based smart notifications",
+    ],
+    color: PALETTE.red,
+    image: "/images/room8-dashboard.png",
+  },
+  {
+    title: "HERA",
+    tech: "Logisim-Evolution, Digital Logic, RISC Architecture",
+    description: "Implemented and debugged HERA (Haverford Architecture) — a custom CPU built in Logisim-Evolution for Computing Systems. Worked on add/sub circuits, 16-register bank, and the ALSU.",
+    highlights: [
+      "Add/sub circuits with carry propagation",
+      "16-register bank (R0–R15)",
+      "ALSU: arithmetic, logic, and shift operations",
+    ],
+    color: PALETTE.red,
+    image: "/images/hera-full-cpu.png",
   },
   {
     title: "World Bank Documentary",
@@ -235,14 +251,14 @@ const projectBuckets = [
     items: [
       { ...getProject("Local Link"), slug: "local-link" },
       { ...getProject("InfraVision"), slug: "infra-vision" },
-      { ...getProject("Fresh Start"), slug: "fresh-start" },
+      { ...getProject("Room8"), slug: "room8" },
     ]
   },
   {
     id: "systems",
     label: "Systems & Architecture",
     items: [
-      { name: "Systems & architecture coursework (coming soon)" }
+      { ...getProject("HERA"), slug: "hera" },
     ]
   },
   {

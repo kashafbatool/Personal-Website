@@ -101,6 +101,8 @@ import KashafPortfolio from './KashafPortfolio';
 import BackgroundFX from './BackgroundFX';
 import InfraVisionProject from './InfraVisionProject';
 import LocalLinkProject from './LocalLinkProject';
+import Room8Project from './Room8Project';
+import HeraProject from './HeraProject';
 
 export default function App() {
   const basePath = process.env.PUBLIC_URL || '';
@@ -110,7 +112,9 @@ export default function App() {
     : pathname;
   const projectRoutes = {
     '/projects/infra-vision': InfraVisionProject,
-    '/projects/local-link': LocalLinkProject
+    '/projects/local-link': LocalLinkProject,
+    '/projects/room8': Room8Project,
+    '/projects/hera': HeraProject,
   };
 
   const matchedProject = Object.entries(projectRoutes).find(([route]) => {
