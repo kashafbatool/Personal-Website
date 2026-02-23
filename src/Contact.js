@@ -11,16 +11,26 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
     setFormStatus('Sending...');
-    // Simulate send
-    setTimeout(() => {
-      setFormStatus('Message Sent! 🚀');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setFormStatus(''), 3000);
-    }, 1500);
+    try {
+      const res = await fetch('https://formspree.io/f/mwvnwvkgY', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setFormStatus('Message Sent! 🚀');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setFormStatus(''), 3000);
+      } else {
+        setFormStatus('Something went wrong. Try again.');
+      }
+    } catch {
+      setFormStatus('Something went wrong. Try again.');
+    }
   };
 
   const copyEmail = () => {
