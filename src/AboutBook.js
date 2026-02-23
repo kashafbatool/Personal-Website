@@ -187,6 +187,14 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
           onMouseEnter={() => setBookFocused(true)}
           onMouseLeave={() => setBookFocused(false)}
         >
+          {/* Tight wrapper so corner hint sits on the book edge */}
+          <div style={{ position: "relative", display: "inline-block" }}>
+            {/* Corner flip hint */}
+            <div className="book-corner-hint" aria-hidden="true">
+              <div className="book-corner-curl" />
+              <span className="book-corner-label">flip</span>
+            </div>
+
           <div className="about-flipbook" ref={bookRef}>
 
             {/* Cover */}
@@ -286,6 +294,7 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
             {/* Back cover */}
             <div className="hard" />
           </div>
+          </div> {/* end tight wrapper */}
         </div>
       </div>
 
@@ -323,6 +332,54 @@ export default function AboutBook({ journey, PALETTE, activeStop }) {
         }
         .about-flipbook-wrap.is-focused {
           filter: drop-shadow(0 0 55px rgba(255, 210, 110, 0.16));
+        }
+
+        /* ── Corner flip hint ── */
+        .book-corner-hint {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 60px;
+          height: 60px;
+          z-index: 10;
+          pointer-events: none;
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+          animation: cornerBounce 2.4s ease-in-out infinite;
+        }
+        .book-corner-curl {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 40px;
+          height: 40px;
+          background: linear-gradient(
+            225deg,
+            rgba(255, 240, 200, 0.92) 0%,
+            rgba(255, 252, 235, 0.6) 45%,
+            transparent 65%
+          );
+          clip-path: polygon(100% 0, 100% 100%, 0 100%);
+          box-shadow: -3px -3px 8px rgba(0, 0, 0, 0.18);
+          border-radius: 2px 0 0 0;
+        }
+        .book-corner-label {
+          position: absolute;
+          bottom: 42px;
+          right: 6px;
+          font-size: 0.6rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(180, 140, 60, 0.85);
+          font-family: 'Playfair Display', Georgia, serif;
+          font-style: italic;
+          white-space: nowrap;
+        }
+        @keyframes cornerBounce {
+          0%, 100% { transform: translate(0, 0); opacity: 0.85; }
+          40%       { transform: translate(-4px, -4px); opacity: 1; }
+          60%       { transform: translate(-2px, -2px); opacity: 1; }
         }
 
         .about-flipbook {

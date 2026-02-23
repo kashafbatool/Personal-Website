@@ -568,7 +568,7 @@ export default function KashafPortfolio() {
         fontWeight: 500,
         letterSpacing: "0.06em",
       }}>
-        Software Engineer · Full-Stack · CS @ Bryn Mawr
+        Software Engineer · Full-Stack · CS & Math @ Bryn Mawr & Haverford 
       </p>
 
       {/* SMALL SUBTEXT */}
