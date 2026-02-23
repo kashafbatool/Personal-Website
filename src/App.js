@@ -103,6 +103,9 @@ import InfraVisionProject from './InfraVisionProject';
 import LocalLinkProject from './LocalLinkProject';
 import Room8Project from './Room8Project';
 import HeraProject from './HeraProject';
+import SpaceRocksProject from './SpaceRocksProject';
+import DavisProject from './DavisProject';
+import WorldBankProject from './WorldBankProject';
 
 export default function App() {
   const basePath = process.env.PUBLIC_URL || '';
@@ -115,6 +118,9 @@ export default function App() {
     '/projects/local-link': LocalLinkProject,
     '/projects/room8': Room8Project,
     '/projects/hera': HeraProject,
+    '/projects/space-rocks': SpaceRocksProject,
+    '/projects/davis-projects-for-peace': DavisProject,
+    '/projects/world-bank-documentary': WorldBankProject,
   };
 
   const matchedProject = Object.entries(projectRoutes).find(([route]) => {

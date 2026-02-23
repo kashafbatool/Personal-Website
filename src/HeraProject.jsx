@@ -140,7 +140,7 @@ export default function HeraProject() {
               fontWeight: "300",
             }}
           >
-            Haverford Architecture — Custom CPU in Logisim
+            Haverford Educational RISC Architecture — Custom CPU in Logisim
           </div>
 
           <button

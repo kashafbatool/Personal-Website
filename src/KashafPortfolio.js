@@ -214,7 +214,7 @@ const projects = [
     image: "/images/room8-dashboard.png",
   },
   {
-    title: "HERA",
+    title: "Haverford Educational RISC Architecture",
     tech: "Logisim-Evolution, Digital Logic, RISC Architecture",
     description: "Implemented and debugged HERA (Haverford Architecture) — a custom CPU built in Logisim-Evolution for Computing Systems. Worked on add/sub circuits, 16-register bank, and the ALSU.",
     highlights: [
@@ -226,12 +226,36 @@ const projects = [
     image: "/images/hera-full-cpu.png",
   },
   {
+    title: "Space Rocks",
+    tech: "GameMaker Studio, GML",
+    description: "Retro 2D arcade space shooter built from scratch in GameMaker Studio. Implements ship rotation, thrust physics, projectile firing, collision detection, and asteroid breakup mechanics.",
+    highlights: [
+      "Full game loop with collision detection",
+      "Rotation & thrust physics from scratch",
+      "Built in GML (GameMaker Language)",
+    ],
+    color: PALETTE.red,
+    image: "/images/spacerocks-demo.gif",
+  },
+  {
     title: "World Bank Documentary",
     tech: "Video Production, Data Visualization, Research",
     description: "5-minute documentary on clean water initiative featuring resident interviews and data visualizations from 4 villages.",
     highlights: ["Published across 4+ outlets", "Field research in Punjab", "Evidence-based advocacy"],
     color: PALETTE.red,
     image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=500&h=300&fit=crop&crop=center"
+  },
+  {
+    title: "Davis Projects for Peace",
+    tech: "STEM Education, Hardware Setup, Python, VS Code",
+    description: "Secured $16,500+ in grants to deliver STEM and digital literacy programs for 650+ students and educators across rural Pakistan through SciVenture.",
+    highlights: [
+      "$16,500+ in competitive grants secured",
+      "650+ students and educators reached",
+      "10+ workstations configured with Python & VS Code",
+    ],
+    color: PALETTE.red,
+    image: "/images/davis.JPG",
   }
 ];
 
@@ -258,14 +282,14 @@ const projectBuckets = [
     id: "systems",
     label: "Systems & Architecture",
     items: [
-      { ...getProject("HERA"), slug: "hera" },
+      { ...getProject("Haverford Educational RISC Architecture"), slug: "hera" },
     ]
   },
   {
-    id: "robotics",
-    label: "Robotics & Embodied AI",
+    id: "games",
+    label: "Games",
     items: [
-      { name: "Developmental robotics projects (coming soon)" }
+      { ...getProject("Space Rocks"), slug: "space-rocks" },
     ]
   },
   {
@@ -273,7 +297,7 @@ const projectBuckets = [
     label: "Research & Fellowships",
     items: [
       { ...getProject("World Bank Documentary"), slug: "world-bank-documentary" },
-      { name: "Davis Projects for Peace – STEM Carnival", slug: "davis-projects-for-peace" }
+      { ...getProject("Davis Projects for Peace"), slug: "davis-projects-for-peace" }
     ]
   }
 ];
