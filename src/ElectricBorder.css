@@ -7,14 +7,14 @@
   backdrop-filter: blur(12px);
   overflow: visible;
   isolation: isolate;
-  box-shadow: none; 
+  box-shadow: none;
 }
 
 .eb-canvas-container {
   position: absolute;
   inset: -32px;
   pointer-events: none;
-  filter: drop-shadow(0 0 22px var(--electric-border-color, #5227ff));
+  filter: drop-shadow(0 0 22px var(--electric-border-color, #e11d2e));
 }
 
 .eb-canvas {
@@ -36,7 +36,7 @@
   position: absolute;
   border-radius: 40px;
   filter: blur(48px);
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .eb-glow-1 {
@@ -44,7 +44,7 @@
   height: 180px;
   top: -60px;
   left: -60px;
-  background: radial-gradient(circle, rgba(82, 39, 255, 0.4), transparent 60%);
+  background: radial-gradient(circle, rgba(225, 29, 46, 0.4), transparent 60%);
 }
 
 .eb-glow-2 {
@@ -52,19 +52,19 @@
   height: 200px;
   bottom: -80px;
   right: -60px;
-  background: radial-gradient(circle, rgba(255, 159, 252, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(255, 56, 90, 0.25), transparent 70%);
 }
 
 .eb-background-glow {
   inset: 12px;
-  background: linear-gradient(135deg, rgba(82, 39, 255, 0.12), rgba(255, 159, 252, 0.08));
+  background: linear-gradient(135deg, rgba(225, 29, 46, 0.1), rgba(255, 56, 90, 0.06));
   opacity: 0.45;
 }
 
 .eb-content {
   position: relative;
   z-index: 1;
-  color: #f8f8ff;
-  border-radius: inherit;      /* ✅ keep rounding */
-  overflow: hidden;  
+  color: #f3f4f6;
+  border-radius: inherit;
+  overflow: hidden;
 }

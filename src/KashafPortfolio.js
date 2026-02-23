@@ -20,7 +20,7 @@ const journey = [
   {
     title: "The Foundation",
     lines: [
-      "Growing up in Lahore, Pakistan, I watched my parents work tirelessly to provide for our family.",
+      "Growing up in Islamabad, Pakistan, I watched my parents work tirelessly to provide for our family.",
       "My father would leave before sunrise. My mother managed a household with precision that would rival any engineer.",
       "Their dedication wasn't just about survival—it was about building something better. That lesson stuck with me.",
     ],
@@ -33,24 +33,10 @@ const journey = [
     imageLayout: "split",
   },
   {
-    title: "The Values",
-    lines: [
-      "These values: Hardwork – Faith – Relentlessness weren't just words in our home—they were lived daily.",
-      "When things got hard, we worked harder. When the path wasn't clear, we had faith. When doors closed, we found windows.",
-    ],
-    img: "/images/story/slide2-exclamation.png",
-    accent: "#1d4ed8",
-    imageJustify: "center",
-    layout: "flip",
-    textAlign: "center",
-    imageLayout: "stacked",
-    contentAlign: "center",
-  },
-  {
     title: "The Dream",
     lines: [
       "At 16, I discovered something called a 'full-ride scholarship.'",
-      "It felt impossible. A girl from Lahore going to America?",
+      "It felt impossible. A girl from Islamabad going to America?",
       "But my parents had shown me: impossible is just a challenge waiting to be solved. So I applied. And applied. And applied.",
     ],
     img: "/images/story/slide3-plane.png",
@@ -95,9 +81,9 @@ const journey = [
   {
     title: "The Obsession",
     lines: [
-      "React. Python. JavaScript. Firebase. Node.js.",
-      "I devoured tutorials at 2x speed. Built projects that broke. Fixed them. Broke them again.",
-      "My friends went to parties. I went to hackathons. They thought I was crazy. I thought I was finally home.",
+      "My friends went to parties. I built things that broke—then fixed them—then broke them again at 2 AM.",
+      "React. Python. Swift. GameMaker. Each language felt like a new dialect of the same obsession.",
+      "Hackathons weren't events. They were home.",
     ],
     img: "/images/story/slide6-helloworld.png",
     accent: "#10b981",
@@ -124,25 +110,10 @@ const journey = [
     imageLayout: "floated",
   },
   {
-    title: "The Builder",
-    lines: [
-      "One project became ten. Ten became twenty.",
-      "InfraVision: 3D infrastructure diagnostics. Fresh Start: Campus resources for 5,000+ students. Open source contributions. Startups. Research.",
-      "Each line of code taught me something new. But more importantly—each project served someone real.",
-    ],
-    img: "/images/story/slide8-builder.jpg",
-    accent: "#f59e0b",
-    imageJustify: "space-between",
-    layout: "flip",
-    textAlign: "center",
-    contentAlign: "center",
-    imageLayout: "split",
-  },
-  {
     title: "The Bridge",
     lines: [
       "People ask me: 'Do you feel Pakistani or American?'",
-      "I feel like both. I feel like neither. I'm a bridge between tradition and innovation—between Lahore and Pennsylvania.",
+      "I feel like both. I feel like neither. I'm a bridge between tradition and innovation—between Islamabad and Pennsylvania.",
       "And I'm building more bridges with every project.",
     ],
     img: "/images/story/slide9-connect.jpg",
@@ -156,10 +127,10 @@ const journey = [
   {
     title: "The Mission",
     lines: [
-      "Today, I wake up in Pennsylvania but carry Pakistan in everything I build.",
-      "I code in four languages. I dream in two. My mission? Build technology that speaks human.",
-      "Technology that remembers where it came from. Technology that serves people who look like my mother, my neighbors, my community.",
-      "The journey continues. Want to build something meaningful together?",
+      "I wake up in Pennsylvania, but I build for Islamabad. For rural artisans. For students without resources.",
+      "For communities that technology forgot.",
+      "My mission is simple: build things that matter, for people who matter.",
+      "The journey continues—want to be part of it?",
     ],
     img: "/images/story/slide10-globe.jpg",
     accent: "#7c3aed",
@@ -477,11 +448,19 @@ export default function KashafPortfolio() {
   }, []);
   */
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    const container = scrollRef.current;
+    if (section && container) {
+      container.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
+    }
+  };
+
   const skills = {
-    "Programming": ["Python", "JavaScript", "Java", "TypeScript"],
-    "Frontend": ["React", "React Native", "HTML/CSS", "Figma"],
-    "Backend": ["Node.js", "Firebase", "SQL", "Flask"],
-    "Tools": ["Git", "NumPy", "Pandas", "Matplotlib"]
+    "Programming": ["Python", "JavaScript", "TypeScript", "Java", "Swift"],
+    "Frontend": ["React", "React Native", "SwiftUI", "HTML/CSS", "Figma"],
+    "Backend": ["Node.js", "Firebase", "PostgreSQL", "Flask", "SQL"],
+    "DevOps & Tools": ["Git", "Docker", "Kubernetes", "NumPy", "Pandas"]
   };
 
   
@@ -591,10 +570,20 @@ export default function KashafPortfolio() {
                 <span className={`cursor ${isTypingDone ? "done" : ""}`}>|</span>
               </h1>
 
+      <p style={{
+        marginTop: "0.6rem",
+        color: PALETTE.redSoft,
+        fontSize: "1rem",
+        fontWeight: 500,
+        letterSpacing: "0.06em",
+      }}>
+        Software Engineer · Full-Stack · CS @ Bryn Mawr
+      </p>
+
       {/* SMALL SUBTEXT */}
       <p
         style={{
-          marginTop: "1.5rem",
+          marginTop: "1rem",
           color: "#e0e0e0",
           fontSize: "1.3rem",
           fontWeight: 300
@@ -605,8 +594,8 @@ export default function KashafPortfolio() {
 
       {/* BUTTONS */}
       <div style={{ marginTop: "2rem", display: "flex", gap: "20px" }}>
-        <button className="cta-primary">Work With Me</button>
-        <button className="cta-secondary">Contact Me</button>
+        <button className="cta-primary" onClick={() => scrollToSection('projects')}>Work With Me</button>
+        <button className="cta-secondary" onClick={() => scrollToSection('contact')}>Contact Me</button>
       </div>
     </div>
 
