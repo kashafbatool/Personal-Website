@@ -308,8 +308,6 @@ export default function KashafPortfolio() {
   const [openBucketId, setOpenBucketId] = useState("fullstack"); // default bucket
   const activeBucket = projectBuckets.find((b) => b.id === openBucketId);
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [formStatus, setFormStatus] = useState('');
   const [typedIntro, setTypedIntro] = useState("");
   const [isTypingDone, setIsTypingDone] = useState(false);
   const [activeStop, setActiveStop] = useState(0);
@@ -318,7 +316,6 @@ export default function KashafPortfolio() {
   const aboutRef = useRef(null);    // the about section
   //const stopRefs = useRef([]);
   const basePath = process.env.PUBLIC_URL || '';
-  const [scrollContainer, setScrollContainer] = useState(null);
   const navItems = [
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
@@ -415,11 +412,6 @@ export default function KashafPortfolio() {
   }, []);
 
   useEffect(() => {
-    setScrollContainer(scrollRef.current);
-  }, []);
-
-
-  useEffect(() => {
   const scroller = scrollRef.current;
   const section = aboutRef.current;
   if (!scroller || !section) return;
@@ -500,23 +492,6 @@ export default function KashafPortfolio() {
   };
 
   
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-
-  const handleSubmit = () => {
-    setFormStatus('Sending... ✨');
-    setTimeout(() => {
-      setFormStatus('Message Sent! 🎉');
-      setTimeout(() => {
-        setFormStatus('');
-        setFormData({ name: '', email: '', message: '' });
-      }, 2000);
-    }, 1500);
-  };
 
   return (
     <div style={{

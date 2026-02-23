@@ -1,5 +1,4 @@
 import React from 'react';
-import Antigravity from './Antigravity';
 import ElectricBorder from './ElectricBorder';
 import './BlogSection.css';
 
@@ -16,7 +15,7 @@ export default function BlogSection() {
         <div className="blog-section__grid" />
       </div>
         <div className="blog-section__inner">
-        <h2 className="blog-section__main-title"></h2>
+        <h2 className="blog-section__main-title"><span className="sr-only">Blog</span></h2>
         <div className="blog-section__content">
           <p className="blog-section__subtitle">My Blog</p>
 

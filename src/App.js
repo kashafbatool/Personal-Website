@@ -96,7 +96,6 @@ export default function App() {
 
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import KashafPortfolio from './KashafPortfolio';
 import BackgroundFX from './BackgroundFX';
 import InfraVisionProject from './InfraVisionProject';
