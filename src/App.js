@@ -96,6 +96,7 @@ export default function App() {
 
 
 import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import KashafPortfolio from './KashafPortfolio';
 import BackgroundFX from './BackgroundFX';
 import InfraVisionProject from './InfraVisionProject';
@@ -134,9 +135,15 @@ export default function App() {
         <div style={{ position: 'relative', zIndex: 2 }}>
           <ProjectComponent />
         </div>
+        <Analytics />
       </>
     );
   }
 
-  return <KashafPortfolio />;
+  return (
+    <>
+      <KashafPortfolio />
+      <Analytics />
+    </>
+  );
 }
